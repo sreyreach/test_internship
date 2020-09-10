@@ -22,11 +22,11 @@ class PostJobController extends Controller
 
     public function view(){
         $jobs = PostJob::get();
-        return view('\welcome',['jobs' => $jobs]);
+        return view('\index',['jobs' => $jobs]);
     }
      public function hotjob(){
         $jobs = PostJob::get();
-        return view('\welcome',['jobs' => $jobs]);
+        return view('\index',['jobs' => $jobs]);
     }
     public function  categories(){
         $jobs = PostJob::get();
