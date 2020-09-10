@@ -80,12 +80,20 @@ class UserControler extends Controller
         return response()->json($user);
     }
 
-    public function getDownloadProfile($id)
-    { 
+    // public function getDownloadProfile($id)
+    // { 
+    //     $user = User::findOrFail($id);
+
+    //     $file_path = public_path('profiles/'.$user->images);
+    //     return response()->download($file_path);
+
+    // }
+    public function getDownloadphoto($id)
+    {
         $user = User::findOrFail($id);
 
-        $file_path = public_path('profiles'.$user->images);
+        $file_path = public_path('profiles/'.$user->images);
         return response()->download($file_path);
-
     }
+ 
 }
