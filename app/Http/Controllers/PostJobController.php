@@ -88,8 +88,9 @@ class PostJobController extends Controller
             'company_profile'   =>  $new_name,
         );
 
-        $user = PostJob::create($form_data);
-        return redirect('/')->with('success', 'Data Added successfully!');
+        $user = PostJob::create($form_data)->paginate(10);
+        return redirect('/')->with('success', 'Data Added successfully!')
+        ->with('i', (request()->input('page',1) -1) *5);
     }
 
     /**

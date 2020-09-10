@@ -15,7 +15,7 @@
 </head>
 <body>
 	@include('header-fooder.header')
-	<div class="limiter">
+	<div class="limiter" style="margin-top: -5%">
 		<div class="container-login100" style="background-image: url('images/b.png');">
 			<div class="wrap-login100 p-t-190 p-b-30">
 				<form method="POST" action="{{ url('update',Auth::user()->id)}}" enctype="multipart/form-data" class="login100-form validate-form">

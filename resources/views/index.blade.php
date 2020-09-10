@@ -236,7 +236,8 @@
 			   </div>
 		   </div>
 		   <hr> 
-		   @endforeach                   
+		   @endforeach 
+		   {{-- {{ $jobs->links() }}                   --}}
 		   <div data-v-552e6ab7="" class="uk-flex inner-item" style="background-color: #fff;  width: 800px;">
 			   <div data-v-552e6ab7="" class="uk-flex uk-flex-center uk-flex-middle" style="height: 70px; padding-bottom: 10px;>
 				   <div data-v-552e6ab7=">
