@@ -48,6 +48,7 @@ class AuthControler extends Controller
 
                         return response()->json(['error'=>'Unauthorised'], 401);
                     }
+        $request['images']   = "profiles/".$new_name;
         $request['password'] = Hash::make($request['password']);
         $api_token = Str::random(60);
         $request['api_token'] = $api_token;
