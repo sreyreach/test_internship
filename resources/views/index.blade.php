@@ -4,7 +4,7 @@
     <title>Job - Finder</title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link href="{{ asset('http://www.topjobcambodia.com/favicon.ico" type="image/x-icon" rel="shortcut icon') }}" />
+	<link href="http://www.topjobcambodia.com/favicon.ico" type="image/x-icon" rel="shortcut icon" />
     <link href="{{ asset('https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/open-iconic-bootstrap.min.css') }}">
@@ -204,11 +204,11 @@
     </div>
 
 
-	<section class="ftco-section bg-light" style="margin: 0%">
-		<div class="row-1" style=" margin-left: 20%">
+	<section class="ftco-section bg-light" style="margin: 0%; background:slategrey">
+		<div class="row-1" style=" margin-left: 20%; ">
 		@foreach ($jobs as $item)
-	   <div data-v-552e6ab7="" class="uk-flex inner-item" style="background-color: #ffff">
-		  
+	   <div data-v-552e6ab7="" class="uk-flex inner-item" style="background-color: #ffff; margin-top:-3%">
+
 		   <div data-v-552e6ab7="" class="section-1" style="margin-left: 5% ">
 			   <div data-v-552e6ab7="" class="img-wrapper">
 				   {{-- {{ $item->company_profile }} --}}
@@ -218,12 +218,13 @@
 		   </div>
 		  
 		   <div data-v-552e6ab7="" class="section-2">
+			   <a href="{{ url('show',$item->id)}}">
 					<div data-v-552e6ab7="" style="overflow: hidden;">
 						<h2 data-v-552e6ab7="" class="job-item-title"> {{ $item->title }} </h2> 
 						<div data-v-552e6ab7="" class="job-item-sub-title">
 							{{ $item->company }}
 						</div> 
-						<span data-v-552e6ab7="" class="job-item-location">{{ $item->job_type }}&nbsp;&nbsp;&nbsp;	 {{ $item->location }}</span>
+						<span data-v-552e6ab7="" class="job-item-location">{{ $item->job_type }}&nbsp;&nbsp;&nbsp;	 {{ $item->location->location }}</span>
 						<br>
 						<span data-v-552e6ab7="" class="package__diamond">Top</span>
 						<span data-v-552e6ab7="" class="job-item-location">{{ $item->created_at }}</span>
@@ -231,11 +232,13 @@
 					</div> 
 		   	
 			   
-			   <div data-v-552e6ab7="" class="package">
-			   <a data-v-552e6ab7="" id="toggle-quick-view-70320" class="view-job uk-visible@l" href="{{ url('show',$item->id)}}">View job</a> 
-			   </div>
+					<div data-v-552e6ab7="" class="package">
+					<a data-v-552e6ab7="" id="toggle-quick-view-70320" class="view-job uk-visible@l" href="{{ url('show',$item->id)}}">View job</a> 
+					</div>
+				</a>
 		   </div>
-		   <hr> 
+		   <hr>
+		
 		   @endforeach 
 		   {{-- {{ $jobs->links() }}                   --}}
 		   <div data-v-552e6ab7="" class="uk-flex inner-item" style="background-color: #fff;  width: 800px;">

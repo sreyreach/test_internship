@@ -45,7 +45,7 @@
         </div>
         <div data-v-552e6ab7="" class="section-2" style="margin-left: 5%">
             <div data-v-552e6ab7="" style="overflow: hidden;">
-                <h6 data-v-552e6ab7="" class="job-item-title1">Location:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $jobs->location }}</h6> 
+                <h6 data-v-552e6ab7="" class="job-item-title1">Location:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $jobs->location->location }}</h6> 
             </div>
         </div>
        <div data-v-552e6ab7="" class="section-2" style="margin-left: 5%">

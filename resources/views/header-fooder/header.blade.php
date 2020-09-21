@@ -37,7 +37,7 @@
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
 		  {{-- <a class="navbar-brand" href="index.html">Jobpply</a> --}}
-		  <a class="navbar-brand"  href="/"> <img src="\images\logo.png"></a>
+		  <a class="navbar-brand"  href="/"> <img src="\images\logo.png" ></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -55,9 +55,20 @@
               </a>
 
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  {{-- <a class="dropdown-item" href="#"
+                    onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                    {{ __('View post Job') }}
+                  </a> --}}
+                  <a class="dropdown-item" href="/my_post" >
+                    {{ __('View post Job') }}
+                  </a>
+                  {{-- <a class="dropdown-item" href="{{url('edit/user',Auth::user()->id)}}" >
+                    {{ __('Edit Profile') }}
+                  </a> --}}
                   <a class="dropdown-item" href="{{ route('logout') }}"
                      onclick="event.preventDefault();
-                                   document.getElementById('logout-form').submit();">
+                        document.getElementById('logout-form').submit();">
                       {{ __('Logout') }}
                   </a>
 
@@ -67,7 +78,7 @@
               </div>
           </li>
           <li class="#" style="margin-top:2%" >
-            <a href="/profile" class="image_profile">
+            <a href="" class="image_profile">
               {{-- <div class="user-img mb-4" style="background-image: url(images/sreyreach.jpg); width:40%;  height: 70%;border-radius: 50%;"> --}}
                 @if (Auth::user() == null)
                   <div class="user-img mb-4" style="background-image: url(images/user.png); width:25px;  height: 25px;border-radius: 50%; ">

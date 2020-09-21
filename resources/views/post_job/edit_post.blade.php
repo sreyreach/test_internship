@@ -79,7 +79,7 @@
           </div>
           <div class="col-md-12 col-lg-8 mb-5">
           
-          <form method="POST" action="{{ url('update',$job->id)}}" enctype="multipart/form-data" class="p-5 bg-white">
+          <form method="POST" action="{{ url('update/postjob',$job->id)}}" enctype="multipart/form-data" class="p-5 bg-white">
             {{ csrf_field() }}
               <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">

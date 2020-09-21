@@ -16,13 +16,14 @@ class CreatePostjobTable extends Migration
         Schema::create('postjob', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->unsignedBigInteger('category_id');
             $table->string('company');
             $table->string('post_date');
             $table->string('closing_date');
             $table->longText('company_description');
             $table->longText('apply');
             $table->string('job_type');
-            $table->string('location');
+            $table->string('location_id');
             $table->longText('job_description');
             $table->string('company_profile');
             $table->unsignedBigInteger('user_id')->index();

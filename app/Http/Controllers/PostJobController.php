@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\PostJob;
+use App\Category;
 use DB;
 use Vinkla\Hashids\Facades\Hashids;
 class PostJobController extends Controller
@@ -17,7 +18,7 @@ class PostJobController extends Controller
     public function index()
     {
         $job = PostJob::where('user_id', Auth::User()->id);
-        return view('\profile', compact('jobs'));
+        return view('\my_post', compact('jobs'));
     }
 
     public function view(){
@@ -36,7 +37,7 @@ class PostJobController extends Controller
     
     public function  profile(){
         $jobs = PostJob::where("user_id",Auth::user()->id)->get();
-        return view('\profile',['jobs' => $jobs]);
+        return view('\my_post',['jobs' => $jobs]);
     }
     /**
      * Show the form for creating a new resource.
@@ -56,35 +57,38 @@ class PostJobController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->All());
+        //dd($request->All());
         $request->validate([
             'title'             =>  'required',
+            'category_id'      =>  'required',
             'company'           => 'required',
             'post_date'           => 'required',
             'closing_date'           => 'required',
             'company_description'    => 'required',
-            'apply'           => 'required',
+            'apply'                 => 'required',
             'job_type'          =>  'required',
-            'location'          =>  'required',
+            'location_id'          =>  'required',
             'job_description'   =>  'required',
             'company_profile'  => 'required|image|max:2048',
         ]);
-
+        
         $image = $request->file('company_profile');
         $new_name = rand() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $new_name);
 
         $form_data = array(
             'title'             => $request->title,
+            'category_id'       => $request->category_id,
             'company'           => $request->company,
             'post_date'           => $request->post_date,
             'closing_date'           => $request->closing_date,
             'company_description'           => $request->company_description,
             'apply'           => $request->apply,
             'job_type'          => $request->job_type,
-            'location'          => $request->location,
+            'location_id'          => $request->location_id,
             'job_description'   => $request->job_description,
             'user_id'           => Auth::user()->id,
+            
             'company_profile'   =>  $new_name,
         );
 
@@ -159,7 +163,7 @@ class PostJobController extends Controller
         );
 
         PostJob::whereId($id)->update($form_data);
-        return redirect('/profile')->with('success', 'Data Added successfully!');
+        return redirect('/update')->with('success', 'Data Added successfully!');
     }
 
     /**
@@ -172,7 +176,7 @@ class PostJobController extends Controller
     {
         $job = PostJob::findOrFail($id);
         $job->delete();
-        return redirect('/profile')->with('success','Data is successfully deleted!');
+        return redirect('/my_post')->with('success','Data is successfully deleted!');
     }
 
     // public function search(Request $request)
@@ -199,7 +203,7 @@ class PostJobController extends Controller
         ->orwhere('title','like', "%{$title}")
         ->orwhere('job_type','=', "%{$job_type}")
         ->get();
-        return view('\welcome', compact('jobs'));
+        return view('\index', compact('jobs'));
           
     }
     

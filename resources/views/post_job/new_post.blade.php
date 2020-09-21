@@ -122,33 +122,27 @@
                 </div>
               </div>
 
+              <div class="row form-group mb-5">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="font-weight-bold" for="fullname">Title</label>
+                  <input type="text" name="title" value="{{ old('title')}}"  id="fullname" class="form-control" placeholder="Title">
+                </div>
+              </div>
+
               <div class="col-md mr-md-2">
                 <div class="form-group">
                   <div class="form-field" style="margin-left: -3%">
                     <label for="option-job-type-4" style="font-weight: 700 !important;">Job Title</label>
-                    <select name="title" id="" class="form-control">
-                      <option value="Title">Title</option>
-                      <option value="Advertising">Advertising</option>
-                      <option value="Accounting">Accounting</option>
-                      <option value="Customer Service">Customer Service</option>
-                      <option value="Education & Training">Education & Training</option>
-                      <option value="E-Commerce">E-Commerce</option>
-                      <option value="Graphic Designer">Graphic Designer</option>
-                      <option value="Marketing & Sales">Marketing & Sales</option>
-                      <option value="Multimedia">Multimedia</option>
-                      <option value="Office & Admin">Office & Admin</option>
-                      <option value="Project Management">Project Management</option>
-                      <option value="PHP Programmingg">PHP Programmingg</option>
-                      <option value="Software Development">Software Development</option>
-                      <option value="Social Media">Social Media</option>
-                      <option value="Web Developmen">Web Development</option>
-                      <option value="Web Designer">Web Designer</option>
+                    <select name="category_id" id="" class="form-control">
+                      @foreach ( $category as $item)
+                    <option value="{{ $item->id }}">{{ $item->title}}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
               </div>
 
-              @error('title')
+              @error('category_id')
               <span class=" text-danger ">{{ $message }}</span>
               @enderror
 
@@ -181,7 +175,7 @@
                 </div>
               </div>
               
-              @error('clos_date')
+              @error('closing_date')
               <span class=" text-danger ">{{ $message }}</span>
               @enderror
 
@@ -222,46 +216,23 @@
                 <div class="form-group">
                   <div class="form-field" style="margin-left: -3%">
                     <label for="option-job-type-4" style="font-weight: 700 !important;">Location</label>
-                    <select name="location" id="" class="form-control">
-                      <option value="Location">Location</option>
-                      <option value="Phnom Penh">Phnom Penh</option>
-                      <option value="Banteay Meanchey">Banteay Meanchey</option>
-                      <option value="Battambang">Battambang</option>
-                      <option value="Kampong Cham">Kampong Cham</option>
-                      <option value="Kampong Chhnang">Kampong Chhnang</option>
-                      <option value="Kampong Som">Kampong Som</option>
-                      <option value="Kampong Speu">Kampong Speu</option>
-                      <option value="Kampong Thom">Kampong Thom</option>
-                      <option value="Kampot">Kampot</option>
-                      <option value="Kandal">Kandal</option>
-                      <option value="Kep">Kep</option>
-                      <option value="Koh Kong">Koh Kong</option>
-                      <option value="Mondulkiri">Mondulkiri</option>
-                      <option value="Oddar Meanchey">Oddar Meanchey</option>
-                      <option value="Overseas">Overseas</option>
-                      <option value="Pailin">Pailin</option>
-                      <option value="Preah Vihear">Preah Vihear</option>
-                      <option value="Prey Veng">Prey Veng</option>
-                      <option value="Pursat">Pursat</option>
-                      <option value="Ratanakiri">Ratanakiri</option>
-                      <option value="Siem Reap">Siem Reap</option>
-                      <option value="Steung Treng">Steung Treng</option>
-                      <option value="Svay Rieng">Svay Rieng</option>
-                      <option value="Takeo">Takeo</option>
-                      <option value="Tbong Khmum">Tbong Khmum</option>
+                    <select name="location_id" id="" class="form-control">
+                      @foreach ( $location as $item)
+                      <option value="{{ $item->id }}">{{ $item->location}}</option>
+                        @endforeach
                     </select>
                   </div>
                 </div>
               </div>
 
-              @error('location')
+              @error('location_id')
               <span class=" text-danger ">{{ $message }}</span>
               @enderror
 
               <div class="row form-group">
                 <div class="col-md-12"><h3>Company Profile</h3></div>
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <textarea id="summernote" name="company_description" value="{{ old('company_descriptio')}}" ></textarea>
+                  <textarea id="summernote" name="company_description" value="" >{!! old('company_description') !!}</textarea>
                 </div>
               </div>
 
@@ -272,7 +243,7 @@
               <div class="row form-group">
                 <div class="col-md-12"><h3>Job Description</h3></div>
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <textarea id="summernote2" name="job_description" value="{{ old('job_description')}}" ></textarea>
+                  <textarea id="summernote2" name="job_description" value="" >{!! old('job_description')!!}</textarea>
                 </div>
               </div>
 
@@ -283,7 +254,7 @@
               <div class="row form-group">
                 <div class="col-md-12"><h3>How to Apply</h3></div>
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <textarea id="summernote3" name="apply" value="{{ old('apply')}}" ></textarea>
+                  <textarea id="summernote3" name="apply" value="">{!! old('apply') !!}</textarea>
                 </div>
               </div>
 
