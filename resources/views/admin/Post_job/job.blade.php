@@ -16,9 +16,9 @@
             <span class="panel-title">
                 <span  style=" margin-left:1%"></span></span>
             <div class="pull-right">
-                <a href="{{ route('employer.create') }}">
+                <a href="#">
                 <span class="fa fa-plus" style="color:#fff; margin-left:-15%"></span>
-            </a>
+                </a>
             </div>
         </div>
     </div>
@@ -28,34 +28,35 @@
            <tr>
                <th>№</th>
                <th>Photo</th>
-               <th name="first_name">First Name</th>
-               <th name="last_name">Last Name</i></th>
-               <th name="company_name">Company Name</th>
-               <th name="phone_number">Phone number</th>
-               <th name="email">Email</th>
-               <th name="website">Website</th>
+               <th name="title">Title</th>
+               <th name="job_type">Job Type</i></th>
+               <th name="company">Company Name</th>
+               <th name="lacation_id">Location</th>
+               <th name="post_date">Post date</th>
+               <th name="closing_date">Closing date</th>
                <th>Action</th>
            </tr>
        </thead>
        <tbody>
-        @foreach ($user as $data)
+        @foreach ($postjob as $data)
             <tr>
             <td>{{ $data->id }}</td>
             <td style="text-align:center">
-                <img src="{{ URL::to('/') }}/{{ $data->images}}"class="img-thumbnail" width="75"/>
+                <img src="{{ URL::to('/') }}/{{ $data->company_profile}}"class="img-thumbnail" width="75"/>
             </td>
-            <td>{{ $data->first_name   }}</td>
-            <td>{{ $data->last_name    }}</td>
-            <td>{{ $data->company_name }}</td>
-            <td>{{ $data->phone_number }}</td>
-            <td>{{ $data->email        }}</td>
-            <td>{{ $data->website      }}</td>
-                <td class="icon-button">
-                    <a title="show info" href="{{ route('employer.show', $data) }}"><span class="fa fa fa-book text-yellow"></span> </a> &nbsp;|&nbsp; 
-                           
-                    <a title="edit" href="{{ route('employer.edit', $data) }}"><span class="fa fa-pencil"></span> </a> |
+            <td>{{ $data->title              }}</td>
+            <td>{{ $data->job_type           }}</td>
+            <td>{{ $data->company            }}</td>
+            <td>{{ $data->location->location }}</td>
+            <td>{{ $data->post_date          }}</td>
+            <td>{{ $data->closing_date       }}</td>
 
-                    <a class="delete_confirm" href="{{ url('/user/'.$data->id.'/destroy') }}" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a>
+                <td class="icon-button">
+                    <a title="Show info" href="#"><span class="fa fa fa-book text-yellow"></span> </a> &nbsp;|&nbsp; 
+                           
+                    <a title="Show info" href="#"><span class="fa fa-pencil"></span></a> |
+
+                    <a class="delete_confirm" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a>
                 </td>
             </tr>
         @endforeach

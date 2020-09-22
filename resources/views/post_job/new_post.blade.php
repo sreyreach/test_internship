@@ -135,7 +135,7 @@
                     <label for="option-job-type-4" style="font-weight: 700 !important;">Job Title</label>
                     <select name="category_id" id="" class="form-control">
                       @foreach ( $category as $item)
-                    <option value="{{ $item->id }}">{{ $item->title}}</option>
+                      <option value="{{ $item->id }}">{{ $item->title}}</option>
                       @endforeach
                     </select>
                   </div>

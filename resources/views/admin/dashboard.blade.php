@@ -58,7 +58,7 @@
             </a>
             {{-- @endif
             @if( Auth::user()->role == "2" || Auth::user()->role == "1") --}}
-            <a href="#">
+            <a href="{{ route('post.index') }}">
                 <div id="classes" class="item ">
                     <img class="item-icon" src="/images/class.png"/>
                     <h2 class="item-title">Post Job</h2>

@@ -72,10 +72,12 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    
+    public function show($id) {
+        $user = User::findOrFail($id);
+        return view('\admin\admin\read', compact('user'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

@@ -72,7 +72,8 @@ class EmployerController extends Controller
      */
     public function show($id)
     {
-        
+        $user = User::findOrFail($id);
+        return view('\admin\Employer\read', compact('user'));
     }
 
     /**
