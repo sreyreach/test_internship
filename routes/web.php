@@ -81,17 +81,11 @@ Route::resource('location','LocationController');
 Route::get('/home', 'LocationController@view');
 
 //admine
-
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
-
-Route::get('/user_admin', function () {
-    return view('admin.admin.user_admin');
-});
-Route::get('/create_user', function () {
-    return view('admin.admin.create');
-});
 Route::resource('user','UserController'); 
-Route::get('/user/{id}/destroy', 'UserController@destroy');
 Auth::routes();
+Route::resource('admin','AdminController');
+Route::get('/user/{id}/destroy', 'AdminController@destroy');
+
+//employer
+Route::resource('employer','EmployerController');
+Route::get('/employer/{id}/destroy', 'AdminController@destroy');

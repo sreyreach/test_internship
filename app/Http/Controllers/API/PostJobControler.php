@@ -16,12 +16,160 @@ use App\PostJob;
 
 class PostJobControler extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     $postjob = DB::table('postjob')->latest('id')->get();
+    //     return response()->json($postjob);
+    // }
+
+    public function index(Request $request)
     {
-        $postjob = DB::table('postjob')->latest('id')->get();
+        $job_type=$request->job_type;
+        $location_id = $request->location_id;
+        $job_title = $request->job_title;
+        if($job_type ==null and $location_id ==null and $job_title==null){
+            $postjob = DB::table('postjob')
+        // ->Join('postjob', 'users.id', '=', 'postjob.user_id')
+        // ->select(
+        //     'postjob.id',
+        //     'postjob.images',
+        //     'postjob.title',
+        //     'postjob.job_title',
+        //     'postjob.job_type',
+        //     'postjob.job_description',
+        //     'postjob.company_description',
+        //     'postjob.company_profile',
+        //     'postjob.post_date',
+        //     'postjob.closing_date',
+        //     'postjob.location_id',
+        //     'postjob.company_name',
+        //     'postjob.updated_at',
+        //     'postjob.user_id'
+        // )
+        ->orderByDesc('postjob.updated_at')
+        ->paginate(10);
+        return response()->json($postjob);
+        }elseif($job_type ==null and $location_id ==null){
+            return $this->getPostJobByJobTitle("postjob.job_title",$job_title);
+        }elseif($job_type ==null and $job_title ==null){
+            return $this->getPostJobByJobType('postjob.location_id',$location_id);
+        }
+        elseif($job_title ==null and $location_id ==null){
+            return $this->getPostJobByJobType("postjob.job_type",$job_type);
+        }
+        elseif($job_type ==null){
+            return $this->getPostJobByTwoParam("postjob.location_id",$location,"postjob.job_title",$title);
+        }elseif($location_id == null){
+            return $this->getPostJobByTwoParam("postjob.job_type",$job_type,"postjob.job_title",$job_title);
+        }elseif($job_title==null){
+            return $this->getPostJobByTwoParam("postjob.job_type",$job_type,'postjob.location_id',$location_id);
+        }else{
+            return $this->getPostJobByTwoParam("postjob.job_type",$job_type,'postjob.location_id',$location_id,"postjob.job_title",$job_title);
+        }
+        
+    }
+    public function getPostJobByJobType($tableName,$param){
+        $postjob = DB::table('postjob')
+        // ->Join('postjob', 'users.id', '=', 'postjob.user_id')
+        ->where($tableName,$param)
+        // ->select(
+        //     'postjob.id',
+        //     'postjob.images',
+        //     'postjob.title',
+        //     'postjob.job_title',
+        //     'postjob.job_type',
+        //     'postjob.job_description',
+        //     'postjob.company_description',
+        //     'postjob.company_profile',
+        //     'postjob.post_date',
+        //     'postjob.closing_date',
+        //     'postjob.location_id',
+        //     'postjob.company_name',
+        //     'postjob.updated_at',
+        //     'postjob.user_id'
+        // )
+        ->orderByDesc('postjob.updated_at')
+        ->paginate(10);
+        return response()->json($postjob);
+    }
+    public function getPostJobByJobTitle($tableName,$param){
+        $postjob = DB::table('postjob')
+        // ->Join('postjob', 'users.id', '=', 'postjob.user_id')
+        ->where($tableName,'like', '%'.$param.'%')
+        // ->select(
+        //     'postjob.id',
+        //     'postjob.images',
+        //     'postjob.title',
+        //     'postjob.job_title',
+        //     'postjob.job_type',
+        //     'postjob.job_description',
+        //     'postjob.company_description',
+        //     'postjob.company_profile',
+        //     'postjob.post_date',
+        //     'postjob.closing_date',
+        //     'postjob.location_id',
+        //     'postjob.company_name',
+        //     'postjob.updated_at',
+        //     'postjob.user_id'
+        // )
+        ->orderByDesc('postjob.updated_at')
+        ->paginate(10);
         return response()->json($postjob);
     }
 
+    public function getPostJobByTwoParam($tableName1,$param1,$tableName2,$param2){
+        $postjob = DB::table('posjob')
+        // ->Join('postjob', 'users.id', '=', 'postjob.user_id')
+        // ->where("postjob.title",$keyword)
+        ->where($tableName1,$param1)
+        ->where($tableName2,$param2)
+        // ->select(
+        //     'postjob.id',
+        //     'postjob.images',
+        //     'postjob.title',
+        //     'postjob.job_title',
+        //     'postjob.job_type',
+        //     'postjob.job_description',
+        //     'postjob.company_description',
+        //     'postjob.company_profile',
+        //     'postjob.post_date',
+        //     'postjob.closing_date',
+        //     'postjob.location_id',
+        //     'postjob.company_name',
+        //     'postjob.updated_at',
+        //     'postjob.user_id'
+        // )
+        ->orderByDesc('postjob.updated_at')
+        ->paginate(10);
+        return response()->json($postjob);
+    }
+    public function getPostJobByTreeParam($tableName1,$param1,$tableName2,$param2,$tableName3,$param3){
+        $postjob = DB::table('postjob')
+        // ->Join('postjob', 'users.id', '=', 'postjob.user_id')
+        // ->where("postjob.title",$keyword)
+        ->where($tableName1,$param1)
+        ->where($tableName2,$param2)
+        ->where($tableName3,$param3)
+        // ->select(
+        //     'postjob.id',
+        //     'postjob.images',
+        //     'postjob.title',
+        //     'postjob.job_title',
+        //     'postjob.job_type',
+        //     'postjob.job_description',
+        //     'postjob.company_description',
+        //     'postjob.company_profile',
+        //     'postjob.post_date',
+        //     'postjob.closing_date',
+        //     'postjob.location_id',
+        //     'postjob.company_name',
+        //     'postjob.updated_at',
+        //     'postjob.user_id'
+        // )
+        ->orderByDesc('postjob.updated_at')
+        ->paginate(10);
+        return response()->json($postjob);
+    }
     public function store(Request $request){
 
         // $user = User::where('id', $request->user_id)->select('role')->first();

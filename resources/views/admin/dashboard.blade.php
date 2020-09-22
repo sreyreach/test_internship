@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="{{ asset('http://www.topjobcambodia.com/favicon.ico') }}" type="image/x-icon" rel="shortcut icon" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,7 +20,7 @@
     <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Froome - Admin</title>
+    <title>Job Finder - Admin</title>
     <link rel="stylesheet" href="{{ asset('/css/admin/app.css')}}"/>
     <script src="https://kit.fontawesome.com/79d95132b9.js" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
@@ -34,7 +34,7 @@
                 <img src="{{ URL::to('/images/jobseeker.png') }}"/>
             </div>
             {{-- @if( Auth::user()->role == "1" ) --}}
-            <a href="#">
+            <a href="{{ route('admin.index') }}">
                 <div id="admin-profile">
                     <img class="admin-avatar" src="/images/avatar.png"/>
                     <h2 class="admin-name">Admin</h2>
@@ -42,7 +42,7 @@
             </a>
             {{-- @endif
             @if( Auth::user()->role == "2" || Auth::user()->role == "1" ) --}}
-            <a href="#">
+            <a href="{{ route('employer.index') }}">
                 <div id="users" class="item ">
                     <img class="item-icon" src="/images/employers.png"/>
                     <h2 class="item-title">Employer</h2>

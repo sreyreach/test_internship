@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use App\User;
-class UserController extends Controller
+use Illuminate\Pagination\LengthAwarePaginator;
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $request->validate([
             'first_name'   => 'required',
             'last_name'    => 'required',
@@ -64,9 +64,7 @@ class UserController extends Controller
 
         User::create($form_data);
         return redirect('user')->with('success', 'Data Added successfully!');
-
     }
-    
 
     /**
      * Display the specified resource.
@@ -88,10 +86,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('\update_userprofile', compact('user'));
+        return view('\admin\admin\edit', compact('user'));
     }
 
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -116,7 +114,7 @@ class UserController extends Controller
         $image = $request->images;
         $new_name = 'profile_'.rand() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('profiles'), $new_name);
-    
+            
         $form_data = array(
             'images'       => $request->images = "profiles/".$new_name,
             'first_name'   => $request->first_name,
@@ -128,9 +126,11 @@ class UserController extends Controller
         );
         User::whereId($id)->update($form_data);
         // return redirect()->with('success', 'Data Added successfully!');
-        return Redirect::to('/')->with('success', 'Data Added successfully!');
+        // return Redirect::to('\admin')->with('success', 'Data Added successfully!');
+        return redirect('admin')->with('success', 'Data is successfully update !');
 
     }
+    
 
     /**
      * Remove the specified resource from storage.

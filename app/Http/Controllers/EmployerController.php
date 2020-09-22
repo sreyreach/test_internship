@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use App\User;
-class UserController extends Controller
+class EmployerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::where('role',1)->get();
-        return view('\admin\admin\user_admin',['user' => $user]);
-              
+        $user = User::where('role',2)->get();
+        return view('\admin\Employer\employer',['user' => $user]);
     }
 
     /**
@@ -26,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin/admin/create');
+        return view('admin/Employer/create');
     }
 
     /**
@@ -36,7 +34,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $request->validate([
             'first_name'   => 'required',
             'last_name'    => 'required',
@@ -64,9 +62,7 @@ class UserController extends Controller
 
         User::create($form_data);
         return redirect('user')->with('success', 'Data Added successfully!');
-
     }
-    
 
     /**
      * Display the specified resource.
@@ -76,7 +72,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -88,10 +84,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('\update_userprofile', compact('user'));
+        return view('\admin\Employer\edit', compact('user'));
     }
 
-    
     /**
      * Update the specified resource in storage.
      *
@@ -101,8 +96,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request->all());
-        $request->validate([
+         //dd($request->all());
+         $request->validate([
             'images'        => 'required',
             'first_name'   => 'required',
             'last_name'    => 'required',
@@ -127,8 +122,7 @@ class UserController extends Controller
             'phone_number' => $request->phone_number,
         );
         User::whereId($id)->update($form_data);
-        // return redirect()->with('success', 'Data Added successfully!');
-        return Redirect::to('/')->with('success', 'Data Added successfully!');
+        return redirect('employer')->with('success', 'Data is successfully update !');
 
     }
 
@@ -142,6 +136,6 @@ class UserController extends Controller
     {
         $data = User::findOrFail($id);
         $data->delete();
-        return redirect('user')->with('success','Data is successfully deleted!');
+        return redirect('employer')->with('success','Data is successfully deleted!');
     }
 }
