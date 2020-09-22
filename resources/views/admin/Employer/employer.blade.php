@@ -51,7 +51,7 @@
             <td>{{ $data->email        }}</td>
             <td>{{ $data->website      }}</td>
                 <td class="icon-button">
-                    <a title="show info" href="#"><span class="fa fa fa-key text-yellow"></span> </a> &nbsp;|&nbsp; 
+                    <a title="show info" href="#"><span class="fa fa fa-book text-yellow"></span> </a> &nbsp;|&nbsp; 
                            
                     <a title="edit" href="{{ route('employer.edit', $data) }}"><span class="fa fa-pencil"></span> </a> |
 
