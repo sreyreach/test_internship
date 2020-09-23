@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\PostJob;
-use App\Category;
+use App\Catagory;
+use App\Location;
+use App\JobType;
 use DB;
 use Vinkla\Hashids\Facades\Hashids;
 class PostJobController extends Controller
@@ -66,7 +68,7 @@ class PostJobController extends Controller
             'closing_date'           => 'required',
             'company_description'    => 'required',
             'apply'                 => 'required',
-            'job_type'          =>  'required',
+            'job_type_id'          =>  'required',
             'location_id'          =>  'required',
             'job_description'   =>  'required',
             'company_profile'  => 'required|image|max:2048',
@@ -82,9 +84,9 @@ class PostJobController extends Controller
             'company'           => $request->company,
             'post_date'           => $request->post_date,
             'closing_date'           => $request->closing_date,
-            'company_description'           => $request->company_description,
+            'company_description'    => $request->company_description,
             'apply'           => $request->apply,
-            'job_type'          => $request->job_type,
+            'job_type_id'          => $request->job_type_id,
             'location_id'          => $request->location_id,
             'job_description'   => $request->job_description,
             'user_id'           => Auth::user()->id,
@@ -118,7 +120,10 @@ class PostJobController extends Controller
     {
         //dd('edit')
         $job = PostJob::findOrFail($id);
-        return view('\post_job\edit_post', compact('job'));
+        $category = Catagory::get();
+        $location = Location::get();
+        $jobtype  = JobType::get();
+        return view('\post_job\edit_post', compact('job','category','location','jobtype'));
     }
 
     /**

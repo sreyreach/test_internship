@@ -73,7 +73,7 @@
                 </div>
             </a>
             {{-- @endif --}}
-            <a href="#">
+            <a href="{{ route('admincategory.index')}}">
                 <div id="messages" class="item ">
                     <span class="fa fa-plus" style="color: #fff; margin-left:15%; margin-top:5%"></span>
                     <h2 class="item-title">Add Category</h2>
@@ -86,6 +86,13 @@
                     <h2 class="item-title">Add Location</h2>
                 </div>
             </a>
+            <a href="#">
+                <div id="messages" class="item ">
+                    {{-- <img class="item-icon" src="/images/locat.png"/> --}}
+                    <span class="fa fa-power-off" style="color: #fff; margin-left:15%; margin-top:5%"></span>
+                    <h2 class="item-title">Logout</h2>
+                </div>
+            </a>
 
         </div>
         <div id="right">
@@ -94,6 +101,9 @@
             </div>
             <main class="py-4">
             @yield('content')
+            </main>
+        </div>
+    </div>
 
 </body>
 </html>

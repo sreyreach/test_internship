@@ -64,22 +64,10 @@
 													<div class="icon"><span class="ion-ios-arrow-down"></span></div>
 													<div class="icon"><span class="icon-briefcase"></span></div>
 													<select name="title" id="" class="form-control">
-														<option value="Category">Category</option>
-														<option value="Advertising">Advertising</option>
-														<option value="Accounting">Accounting</option>
-														<option value="Customer Service">Customer Service</option>
-														<option value="Education & Training">Education & Training</option>
-														<option value="E-Commerce">E-Commerce</option>
-														<option value="Graphic Designer">Graphic Designer</option>
-														<option value="Marketing & Sales">Marketing & Sales</option>
-														<option value="Multimedia">Multimedia</option>
-														<option value="Office & Admin">Office & Admin</option>
-														<option value="Project Management">Project Management</option>
-														<option value="PHP Programmingg">PHP Programmingg</option>
-														<option value="Software Development">Software Development</option>
-														<option value="Social Media">Social Media</option>
-														<option value="Web Developmen">Web Development</option>
-														<option value="Web Designer">Web Designer</option>
+														<option value="category">Category</option>
+														{{-- @foreach ( $category as $item)
+														<option value="{{ $item->id }}">{{ $item->title}}</option>
+														@endforeach --}}
 													</select>
 												</div>
 											  </div>

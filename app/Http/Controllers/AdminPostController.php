@@ -13,9 +13,8 @@ class AdminPostController extends Controller
      */
     public function index()
     {
-        $postjob = PostJob::latest();
-        // return view('\admin\Post_job\job',['post' => $data]);
-        return view('\admin\Post_job\job', compact('postjob'));
+        $postjob = PostJob::paginate(15);
+        return view('\admin\Post_job\job',['postjob' => $postjob]);
     }
 
     /**
@@ -25,7 +24,7 @@ class AdminPostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/Post_job/create');
     }
 
     /**

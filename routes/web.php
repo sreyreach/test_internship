@@ -73,12 +73,7 @@ Route::get('/add_category', function () {
 Route::resource('category','CategoryController');
 Route::get('/home', 'CategoryController@view');
 
-//Location
-Route::get('/add_location', function () {
-    return view('catagory.location');
-});
-Route::resource('location','LocationController');
-Route::get('/home', 'LocationController@view');
+// Route::get('edit/postjob/{id}', 'CategoryController@edit');
 
 //Location
 Route::get('/add_location', function () {
@@ -86,6 +81,13 @@ Route::get('/add_location', function () {
 });
 Route::resource('location','LocationController');
 Route::get('/home', 'LocationController@view');
+
+//Job Type
+Route::get('/add_job_type', function () {
+    return view('catagory.job_type');
+});
+Route::resource('job_type','JobTypeController');
+Route::get('/home', 'JobTypeController@view');
 
 //admine
 Route::resource('user','UserController'); 
@@ -99,3 +101,6 @@ Route::get('/employer/{id}/destroy', 'AdminController@destroy');
 
 //Admin Post
 Route::resource('post', 'AdminPostController');
+
+//Admin Category
+Route::resource('admincategory','AdminCategoryController');

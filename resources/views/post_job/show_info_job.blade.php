@@ -10,18 +10,18 @@
                     <img src="{{ URL::to('/') }}/images//{{ $jobs->company_profile}}"class="img-thumbnail" width="300"  class="logo" style="margin-left: 10% ; margin-top:20%"/>
                 </div>
             </div>
-       </div>
+        </div>
        <div id="right">   
        
-            <div data-v-552e6ab7="" class="section-2" >
+            <div data-v-552e6ab7="" class="section-2"style="margin-top:20%; margin-left:-27%" >
                 <div data-v-552e6ab7="" style="overflow: hidden;">
-                    <h2 data-v-552e6ab7="" class="job-item-title1" style="font-weight: bolder; color:royalblue; font: italic bold 20px/50px Georgia, serif;"> 
+                    <h2 data-v-552e6ab7="" class="job-item-title1" style=" font-weight: 700; color:royalblue; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif; font-size: revert;"> 
                         {{ $jobs->title }} 
                     </h2> 
-                    <div data-v-552e6ab7="" class="job-item-sub-title" style="margin-top: -4%">
+                    <div data-v-552e6ab7="" class="job-item-sub-title" style="margin-top: -2%; margin-left:0px">
                         {{ $jobs->company }}
                     </div> 
-                    <span data-v-552e6ab7="" class="job-item-location"> {{ $jobs->job_type }}&nbsp;&nbsp;&nbsp;&nbsp; {{ $jobs->location }}</span>
+                    <span data-v-552e6ab7="" class="job-item-location" style="margin-left:0px"> {{ $jobs->updated_at }}&nbsp;&nbsp;&nbsp;&nbsp; {{ $jobs->location->location }}</span>
                     <span data-v-552e6ab7="" class="package__diamond"></span>
                     </div>
                 </div>

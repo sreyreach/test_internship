@@ -172,11 +172,11 @@ class PostJobControler extends Controller
     }
     public function store(Request $request){
 
-        // $user = User::where('id', $request->user_id)->select('role')->first();
+        $user = User::where('id', $request->user_id)->select('role')->first();
 
      //dd($request);
-        
-            $credential = $request->only('title', 'company', 'job_type', 'location', 'job_description',
+        if ($user->role != '1') {
+            $credential = $request->only('title','category_id', 'company', 'job_type_id', 'location_id', 'job_description',
              'user_id','company_profile','post_date','closing_date','company_description','apply');
                 
                 //return $credential;
@@ -196,6 +196,9 @@ class PostJobControler extends Controller
 
                     return response()->json(['error'=>'Unauthorised'], 401);
                 }
+        } else {
+            return response()->json(['error' => 'Wrong position'], 200);
+        }        
 
        $postjob = PostJob::create($request->toArray()); 
        $postjob['createdAt'] = Carbon::parse($postjob->created_at)->format("m d,Y H:i:s");
@@ -231,13 +234,14 @@ class PostJobControler extends Controller
         $form_data = array(
             'id'                  => $request->id,
             'title'               => $request->title,
+            'category_id'         => $request->categoty_id,
             'company'             => $request->company,
             'post_date'           => $request->post_date,
             'closing_date'        => $request->closing_date,
             'company_description' => $request->company_description,
             'apply'               => $request->apply,
-            'job_type'            => $request->job_type,
-            'location'            => $request->location,
+            'job_type_id'            => $request->job_type,
+            'location_id'            => $request->location_id,
             'job_description'     => $request->job_description,
             // 'user_id'             => Auth::user()->id,
             'company_profile'     =>  $new_name,

@@ -87,18 +87,18 @@
 	      </div>
 	    </div>
 	  </nav>
-    <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data" class="p-5 bg-white">
+    <form method="POST" action="{{ route('job_type.store') }}" enctype="multipart/form-data" class="p-5 bg-white">
     @csrf
       <div class="row form-group">
 
         <div class="row form-group mb-5">
             <div class="col-md-12 mb-3 mb-md-0">
-            <label class="font-weight-bold" for="fullname">Job Title</label>
-            <input type="text" name="title" value=""  id="fullname" class="form-control" placeholder="Title">
+            <label class="font-weight-bold" for="fullname">Job Type</label>
+            <input type="text" name="job_type" value=""  id="fullname" class="form-control" placeholder="Job type">
             </div>
         </div>
         
-        @error('company')
+        @error('job_type')
         <span class=" text-danger ">{{ $message }}</span>
         @enderror
       </div>

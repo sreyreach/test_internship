@@ -34,6 +34,7 @@
                <th name="lacation_id">Location</th>
                <th name="post_date">Post date</th>
                <th name="closing_date">Closing date</th>
+               <th name="user_id">User Id</th>
                <th>Action</th>
            </tr>
        </thead>
@@ -42,7 +43,7 @@
             <tr>
             <td>{{ $data->id }}</td>
             <td style="text-align:center">
-                <img src="{{ URL::to('/') }}/{{ $data->company_profile}}"class="img-thumbnail" width="75"/>
+                <img src="{{ URL::to('/') }}/images//{{ $data->company_profile}}"class="img-thumbnail" width="75"/>
             </td>
             <td>{{ $data->title              }}</td>
             <td>{{ $data->job_type           }}</td>
@@ -50,6 +51,7 @@
             <td>{{ $data->location->location }}</td>
             <td>{{ $data->post_date          }}</td>
             <td>{{ $data->closing_date       }}</td>
+            <td>{{ $data->user_id            }}</td>
 
                 <td class="icon-button">
                     <a title="Show info" href="#"><span class="fa fa fa-book text-yellow"></span> </a> &nbsp;|&nbsp; 
@@ -62,6 +64,7 @@
         @endforeach
         </tbody>
    </table>
+   {!! $postjob->links() !!}
 </div>
 </main>
 </form>

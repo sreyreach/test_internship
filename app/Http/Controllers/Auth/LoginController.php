@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use\Auth;
 class LoginController extends Controller
 {
     /*
@@ -26,7 +26,25 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    public function redirectTo(){
+
+        // User role
+        $role = Auth::user()->role; 
+    
+        // Check user role
+        switch ($role) {
+            case '1':
+                    return '/admin';
+                break;
+            case '2':
+                    return '/';
+                break; 
+            default:
+                    return '/admin'; 
+                break;
+        }
+    }
 
     /**
      * Create a new controller instance.

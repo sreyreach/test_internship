@@ -14,8 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::where('role',1)->get();
-        return view('\admin\admin\user_admin',['user' => $user]);
+        // $user = User::where('role',1)->get();
+        // return view('\admin\admin\user_admin',['user' => $user]);
               
     }
 

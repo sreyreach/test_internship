@@ -13,7 +13,7 @@ class EmployerController extends Controller
      */
     public function index()
     {
-        $user = User::where('role',2)->get();
+        $user = User::where('role',2)->paginate(15);
         return view('\admin\Employer\employer',['user' => $user]);
     }
 

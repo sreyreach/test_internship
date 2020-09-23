@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\JobType;
+use App\Location;
+use App\Catagory;
 class JobTypeController extends Controller
 {
     public function store(Request $request)
@@ -14,7 +16,7 @@ class JobTypeController extends Controller
         ]);
 
         $form_data = array(
-            'job_type'             => $request->location,
+            'job_type'             => $request->job_type,
         );
 
         $jobtype=JobType::create($form_data);

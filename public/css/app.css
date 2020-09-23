@@ -183,7 +183,7 @@ body {
     color: #636b6f;
     font-size: 14px;
     font-weight: 600;
-    letter-spacing: .1rem;
+    /* letter-spacing: .1rem; */
     text-decoration: none;
     
 }
@@ -302,7 +302,8 @@ a, a:hover {
   margin-bottom: 5px;
   padding-right: 10px;
   color: #0369b1;
-  font: italic bold 15px/30px Georgia, serif;
+  /* font: italic bold 15px/30px Georgia, serif; */
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
 }
 .jobs .job-items .job-item .inner-item[data-v-552e6ab7] {
   padding: 20px;

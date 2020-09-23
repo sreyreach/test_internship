@@ -25,4 +25,5 @@ class CategoryController extends Controller
         $category = Catagory::get();
         return view('\post_job.new_post',compact('category'));
     }
+    
 }

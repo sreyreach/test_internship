@@ -183,27 +183,9 @@
                 <div class="col-md-12"><h3>Job Type</h3></div>
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label for="option-job-type-1">
-                    <input type="radio" name="job_type" value=" Full Time" id="option-job-type-1"> Full Time
-                  </label>
-                </div>
-                <div class="col-md-12 mb-3 mb-md-0">
-                  <label for="option-job-type-2">
-                    <input type="radio" name="job_type" value="Part Time" id="option-job-type-1"> Part Time
-                  </label>
-                </div>
-                
-                <div class="col-md-12 mb-3 mb-md-0">
-                  <label for="option-job-type-3">
-                    <input type="radio" name="job_type" value=" Freelance" id="option-job-type-1"> Freelance
-                </div>
-                <div class="col-md-12 mb-3 mb-md-0">
-                  <label for="option-job-type-4">
-                    <input type="radio" name="job_type" value=" Internship" id="option-job-type-1"> Internship
-                  </label>
-                </div>
-                <div class="col-md-12 mb-3 mb-md-0">
-                  <label for="option-job-type-4">
-                    <input type="radio" name="job_type" value=" Termporary" id="option-job-type-1"> Termporary
+                    @foreach ( $jobtype as $item)
+                    <input type="radio" name="job_type_id" value=" {{ $item->id }}" id="option-job-type-1"> {{ $item->job_type}}<br>
+                    @endforeach
                   </label>
                 </div>
               </div>

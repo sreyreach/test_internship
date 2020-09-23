@@ -61,6 +61,7 @@
         @endforeach
         </tbody>
    </table>
+   {!! $user->links() !!}
 </div>
 </main>
 </form>

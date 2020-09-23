@@ -94,27 +94,22 @@
                 </div>
               </div>
 
+              <div class="row form-group mb-5">
+                <div class="col-md-12 mb-3 mb-md-0">
+                  <label class="font-weight-bold" for="fullname">Title</label>
+                  <input type="text" name="title" value="{{ $job->title }}"  id="fullname" class="form-control" placeholder="Title">
+                </div>
+              </div>
+
               <div class="col-md mr-md-2">
                 <div class="form-group">
                   <div class="form-field" style="margin-left: -3%">
                     <label for="option-job-type-4" style="font-weight: 700 !important;">Job Title</label>
                     <select name="title" id="" class="form-control">
-                      <option value="Title">Title</option>
-                      <option value="Advertising">Advertising</option>
-                      <option value="Accounting">Accounting</option>
-                      <option value="Customer Service">Customer Service</option>
-                      <option value="Education & Training">Education & Training</option>
-                      <option value="E-Commerce">E-Commerce</option>
-                      <option value="Graphic Designer">Graphic Designer</option>
-                      <option value="Marketing & Sales">Marketing & Sales</option>
-                      <option value="Multimedia">Multimedia</option>
-                      <option value="Office & Admin">Office & Admin</option>
-                      <option value="Project Management">Project Management</option>
-                      <option value="PHP Programmingg">PHP Programmingg</option>
-                      <option value="Software Development">Software Development</option>
-                      <option value="Social Media">Social Media</option>
-                      <option value="Web Developmen">Web Development</option>
-                      <option value="Web Designer">Web Designer</option>
+                      @foreach ( $category as $item)
+                      <option value="{{ $item->id }}">{!! $item->title !!}</option>
+                      @endforeach
+                     
                     </select>
                   </div>
                 </div>
@@ -161,27 +156,9 @@
                 <div class="col-md-12"><h3>Job Type</h3></div>
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label for="option-job-type-1">
-                    <input type="radio" name="job_type" value=" Full Time" id="option-job-type-1"> Full Time
-                  </label>
-                </div>
-                <div class="col-md-12 mb-3 mb-md-0">
-                  <label for="option-job-type-2">
-                    <input type="radio" name="job_type" value="Part Time" id="option-job-type-1"> Part Time
-                  </label>
-                </div>
-                
-                <div class="col-md-12 mb-3 mb-md-0">
-                  <label for="option-job-type-3">
-                    <input type="radio" name="job_type" value=" Freelance" id="option-job-type-1"> Freelance
-                </div>
-                <div class="col-md-12 mb-3 mb-md-0">
-                  <label for="option-job-type-4">
-                    <input type="radio" name="job_type" value=" Internship" id="option-job-type-1"> Internship
-                  </label>
-                </div>
-                <div class="col-md-12 mb-3 mb-md-0">
-                  <label for="option-job-type-4">
-                    <input type="radio" name="job_type" value=" Termporary" id="option-job-type-1"> Termporary
+                    @foreach ( $jobtype as $item)
+                    <input type="radio" name="job_type_id" value=" {{ $item->id }}" id="option-job-type-1"> {{ $item->job_type}}<br>
+                    @endforeach
                   </label>
                 </div>
               </div>
@@ -195,32 +172,10 @@
                   <div class="form-field" style="margin-left: -3%">
                     <label for="option-job-type-4" style="font-weight: 700 !important;">Location</label>
                     <select name="location" id="" class="form-control">
-                      <option value="Location">Location</option>
-                      <option value="Phnom Penh">Phnom Penh</option>
-                      <option value="Banteay Meanchey">Banteay Meanchey</option>
-                      <option value="Battambang">Battambang</option>
-                      <option value="Kampong Cham">Kampong Cham</option>
-                      <option value="Kampong Chhnang">Kampong Chhnang</option>
-                      <option value="Kampong Som">Kampong Som</option>
-                      <option value="Kampong Speu">Kampong Speu</option>
-                      <option value="Kampong Thom">Kampong Thom</option>
-                      <option value="Kampot">Kampot</option>
-                      <option value="Kandal">Kandal</option>
-                      <option value="Kep">Kep</option>
-                      <option value="Koh Kong">Koh Kong</option>
-                      <option value="Mondulkiri">Mondulkiri</option>
-                      <option value="Oddar Meanchey">Oddar Meanchey</option>
-                      <option value="Overseas">Overseas</option>
-                      <option value="Pailin">Pailin</option>
-                      <option value="Preah Vihear">Preah Vihear</option>
-                      <option value="Prey Veng">Prey Veng</option>
-                      <option value="Pursat">Pursat</option>
-                      <option value="Ratanakiri">Ratanakiri</option>
-                      <option value="Siem Reap">Siem Reap</option>
-                      <option value="Steung Treng">Steung Treng</option>
-                      <option value="Svay Rieng">Svay Rieng</option>
-                      <option value="Takeo">Takeo</option>
-                      <option value="Tbong Khmum">Tbong Khmum</option>
+                      @foreach ( $location as $item)
+                        <option value="{{ $item->id }}">{{ $item->location}}</option>
+                      @endforeach
+
                     </select>
                   </div>
                 </div>
@@ -233,7 +188,7 @@
               <div class="row form-group">
                 <div class="col-md-12"><h3>Company Profile</h3></div>
                 <div class="col-md-12 mb-3 mb-md-0">
-                  <textarea id="summernote" name="company_description" >{{ $job->company_description }}}</textarea>
+                  <textarea id="summernote" name="company_description" >{{ $job->company_description }}</textarea>
                 </div>
               </div>
 
