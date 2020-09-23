@@ -13,6 +13,9 @@ use Auth;
 use DB;
 use App\User;
 use App\PostJob;
+use App\Location;
+use App\Catagory;
+use App\JobType;
 
 class PostJobControler extends Controller
 {
@@ -29,23 +32,25 @@ class PostJobControler extends Controller
         $job_title = $request->job_title;
         if($job_type ==null and $location_id ==null and $job_title==null){
             $postjob = DB::table('postjob')
-        // ->Join('postjob', 'users.id', '=', 'postjob.user_id')
-        // ->select(
-        //     'postjob.id',
-        //     'postjob.images',
-        //     'postjob.title',
-        //     'postjob.job_title',
-        //     'postjob.job_type',
-        //     'postjob.job_description',
-        //     'postjob.company_description',
-        //     'postjob.company_profile',
-        //     'postjob.post_date',
-        //     'postjob.closing_date',
-        //     'postjob.location_id',
-        //     'postjob.company_name',
-        //     'postjob.updated_at',
-        //     'postjob.user_id'
-        // )
+            ->leftjoin('category','postjob.category_id','category.id')
+            ->leftjoin('job_type','postjob.job_type_id','job_type.id')
+            ->leftjoin('location','postjob.location_id','location.id')
+            ->select(
+                'postjob.id',
+                'postjob.company_profile',
+                'postjob.title',
+                'category.title AS job_title',
+                'job_type.job_type',
+                'postjob.job_description',
+                'postjob.company_description',
+                'postjob.company_profile',
+                'postjob.post_date',
+                'postjob.closing_date',
+                'location.location',
+                'postjob.company',
+                'postjob.updated_at',
+                'postjob.user_id'
+            )
         ->orderByDesc('postjob.updated_at')
         ->paginate(10);
         return response()->json($postjob);
@@ -72,22 +77,6 @@ class PostJobControler extends Controller
         $postjob = DB::table('postjob')
         // ->Join('postjob', 'users.id', '=', 'postjob.user_id')
         ->where($tableName,$param)
-        // ->select(
-        //     'postjob.id',
-        //     'postjob.images',
-        //     'postjob.title',
-        //     'postjob.job_title',
-        //     'postjob.job_type',
-        //     'postjob.job_description',
-        //     'postjob.company_description',
-        //     'postjob.company_profile',
-        //     'postjob.post_date',
-        //     'postjob.closing_date',
-        //     'postjob.location_id',
-        //     'postjob.company_name',
-        //     'postjob.updated_at',
-        //     'postjob.user_id'
-        // )
         ->orderByDesc('postjob.updated_at')
         ->paginate(10);
         return response()->json($postjob);
@@ -96,22 +85,6 @@ class PostJobControler extends Controller
         $postjob = DB::table('postjob')
         // ->Join('postjob', 'users.id', '=', 'postjob.user_id')
         ->where($tableName,'like', '%'.$param.'%')
-        // ->select(
-        //     'postjob.id',
-        //     'postjob.images',
-        //     'postjob.title',
-        //     'postjob.job_title',
-        //     'postjob.job_type',
-        //     'postjob.job_description',
-        //     'postjob.company_description',
-        //     'postjob.company_profile',
-        //     'postjob.post_date',
-        //     'postjob.closing_date',
-        //     'postjob.location_id',
-        //     'postjob.company_name',
-        //     'postjob.updated_at',
-        //     'postjob.user_id'
-        // )
         ->orderByDesc('postjob.updated_at')
         ->paginate(10);
         return response()->json($postjob);
@@ -150,22 +123,6 @@ class PostJobControler extends Controller
         ->where($tableName1,$param1)
         ->where($tableName2,$param2)
         ->where($tableName3,$param3)
-        // ->select(
-        //     'postjob.id',
-        //     'postjob.images',
-        //     'postjob.title',
-        //     'postjob.job_title',
-        //     'postjob.job_type',
-        //     'postjob.job_description',
-        //     'postjob.company_description',
-        //     'postjob.company_profile',
-        //     'postjob.post_date',
-        //     'postjob.closing_date',
-        //     'postjob.location_id',
-        //     'postjob.company_name',
-        //     'postjob.updated_at',
-        //     'postjob.user_id'
-        // )
         ->orderByDesc('postjob.updated_at')
         ->paginate(10);
         return response()->json($postjob);
@@ -303,5 +260,33 @@ class PostJobControler extends Controller
         // $stu = PostJob::where('title',$title)->get();
         $stu = PostJob::where('title', 'like', '%'.$title.'%')->get();
         return response()->json($stu);
+    }
+
+    public function getLocation(){
+        $location = DB::table('location')
+        ->select(
+
+            'location.id',
+            'location.location'
+        )->get();
+        return response()->json($location);
+    }
+
+    public function getCategory(){
+        $category = DB::table('category')
+        ->select(
+            'category.id',
+            'category.title'
+        )->get();
+        return response()->json($category);
+    }
+
+    public function getJobtype(){
+        $job_type = DB::table('job_type')
+        ->select(
+            'job_type.id',
+            'job_type.job_type'
+        )->get();
+        return response()->json($job_type);
     }
 }

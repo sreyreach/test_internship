@@ -79,7 +79,7 @@
                     <h2 class="item-title">Add Category</h2>
                 </div>
             </a>
-            <a href="#">
+            <a href="{{ route('adminlocation.index')}}">
                 <div id="messages" class="item ">
                     {{-- <img class="item-icon" src="/images/locat.png"/> --}}
                     <span class="fa fa-plus" style="color: #fff; margin-left:15%; margin-top:5%"></span>

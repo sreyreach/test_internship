@@ -34,6 +34,12 @@ Route::get('/postjob/user/{id}','API\PostJobControler@userId');
 Route::get('/postjob/readtypejob/{title}','API\PostJobControler@readTypeJob');
 Route::get('/postjob/getdownload/{id}/{updated_at}','API\PostJobControler@getDownload'); 
 
+//Location
+Route::get('/getlocation','API\PostJobControler@getLocation');
+//Category
+Route::get('/getcategory','API\PostJobControler@getCategory');
+//Job Type
+Route::get('/getjobtype','API\PostJobControler@getJobtype');
 
 //TestController
 Route::get('/test/user/show','API\TestJobControler@index');

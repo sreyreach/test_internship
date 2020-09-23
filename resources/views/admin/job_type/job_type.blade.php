@@ -21,7 +21,7 @@
             <span class="panel-title">
                 <span  style=" margin-left:1%"></span></span>
             <div class="pull-right">
-                <a href="{{ route('category.create')}}">
+                <a href="#">
                 <span class="fa fa-plus" style="color:#fff; margin-left:-15%"></span>
             </a>
             </div>
@@ -32,15 +32,15 @@
        <thead>
            <tr>
                <th>№</th>
-               <th name="email">Title</th>
+               <th name="email">Location</th>
                <th>Action</th>
            </tr>
        </thead>
        <tbody>
-        @foreach ($category as $data)
+        @foreach ($jobtype as $data)
             <tr>
             <td>{{ $data->id }}</td>
-            <td>{{ $data->title}}</td>
+            <td>{{ $data->job_type}}</td>
                 <td class="icon-button">
                     <a title="show info" href="#"><span class="fa fa fa-book text-yellow"></span> </a> &nbsp;|&nbsp; 
                            
@@ -52,7 +52,7 @@
         @endforeach
         </tbody>
    </table>
-   {!! $category->links() !!}
+   {!! $jobtype->links() !!}
 </div>
 </main>
 </form>

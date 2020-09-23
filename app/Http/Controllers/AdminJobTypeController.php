@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use  App\Catagory;
-use Illuminate\Http\Request;
 
-class AdminCategoryController extends Controller
+use Illuminate\Http\Request;
+use App\JobType;
+class AdminJobTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +13,8 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $category = Catagory::paginate(13);
-        return view('\admin\category\job_title',['category' => $category]);
-        // ->with('i', (request()->input('page',1) -1) *5);
+        $jobtype = JobType::paginate(13);
+        return view('\admin\job_type\job_type',['jobtype' => $jobtype]);
     }
 
     /**
@@ -25,7 +24,7 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin/category/create');
+        //
     }
 
     /**
@@ -36,16 +35,7 @@ class AdminCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title'             =>  'required',
-        ]);
-
-        $form_data = array(
-            'title'             => $request->title,
-        );
-
-        $category=Catagory::create($form_data);
-        return redirect('category')->with('success', 'Data Added successfully!');
+        //
     }
 
     /**

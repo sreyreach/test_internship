@@ -104,3 +104,6 @@ Route::resource('post', 'AdminPostController');
 
 //Admin Category
 Route::resource('admincategory','AdminCategoryController');
+
+//Admin Location
+Route::resource('adminlocation','AdminLocationController');
