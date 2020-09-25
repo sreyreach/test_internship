@@ -13,7 +13,7 @@ class AdminPostController extends Controller
      */
     public function index()
     {
-        $postjob = PostJob::paginate(15);
+        $postjob = PostJob::latest()->paginate(13);
         return view('\admin\Post_job\job',['postjob' => $postjob]);
     }
 
@@ -119,6 +119,8 @@ class AdminPostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data =PostJob::findOrFail($id);
+        $data->delete();
+        return redirect('post')->with('success','Data is successfully deleted!');
     }
 }

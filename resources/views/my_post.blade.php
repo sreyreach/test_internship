@@ -22,7 +22,7 @@
                        <div data-v-552e6ab7="" class="job-item-sub-title">
                         {{ $item->company }}
                        </div> 
-                       <span data-v-552e6ab7="" class="job-item-location">{{ $item->job_type }}&nbsp;&nbsp;&nbsp;&nbsp;{{ $item->location->location}}</span>
+                       <span data-v-552e6ab7="" class="job-item-location">{{ $item->jobType->job_type }}&nbsp;&nbsp;&nbsp;&nbsp;{{ $item->location->location}}</span>
                        <br>
                        <span data-v-552e6ab7="" class="package__diamond">Top</span>
                        <span data-v-552e6ab7="" class="job-item-location">{{ $item->created_at }}</span>
@@ -69,6 +69,8 @@
            </div>
         </div>
     </section>
+
+    
         
     </section>
   </section>

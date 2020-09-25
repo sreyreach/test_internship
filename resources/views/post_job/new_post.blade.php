@@ -33,7 +33,7 @@
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" >
 	    <div class="container" >
-	      <a class="navbar-brand" href="/"><img src="\images\logo.png"></a>
+	      <a class="navbar-brand" href="/"><img src="\images\job-finder-logo.png" width="150"></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -160,7 +160,8 @@
               <div class="row form-group mb-5">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="font-weight-bold" for="fullname">Posting Date</label>
-                  <input type="text" name="post_date" value="{{ old('post_date')}}"  id="fullname" class="form-control" placeholder="Date: DD\MM\YYY">
+                  <input type="date" name="post_date" value="{{ old('post_date')}}"  id="fullname" class="form-control" placeholder="Date: DD\MM\YYY">
+                  
                 </div>
               </div>
               
@@ -171,7 +172,7 @@
               <div class="row form-group mb-5">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="font-weight-bold" for="fullname">Closing Date</label>
-                  <input type="text" name="closing_date" value="{{ old('closing_date')}}"  id="fullname" class="form-control" placeholder="Deadline: DD\MM\YYY">
+                  <input type="date" name="closing_date" value="{{ old('closing_date')}}"  id="fullname" class="form-control" placeholder="Deadline: DD\MM\YYY">
                 </div>
               </div>
               

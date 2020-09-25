@@ -92,8 +92,19 @@ class UserControler extends Controller
     {
         $user = User::findOrFail($id);
 
-        $file_path = public_path('profiles/'.$user->images);
+        $file_path = public_path($user->images);
         return response()->download($file_path);
     }
+    // public function getDownload($id)
+    // {
+    //     // $user = User::findOrFail($id)->first;
+    //     // return response()->json($user,200);
+    //     $user = PostJob::findOrFail($id);
+
+    //     $file_path = public_path('images/'.$user->company_profile);
+    //     return response()->download($file_path);
+
+    //    // return response()->json($user->image);
+    // }
  
 }

@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $user = User::where('role',1)->paginate(15);
+        $user = User::where('role',1)->latest()->paginate(10);
         return view('\admin\admin\user_admin',['user' => $user]);
               
     }
@@ -63,7 +63,7 @@ class AdminController extends Controller
         );
 
         User::create($form_data);
-        return redirect('user')->with('success', 'Data Added successfully!');
+        return redirect('employer')->with('success', 'Data Added successfully!');
     }
 
     /**
@@ -129,7 +129,7 @@ class AdminController extends Controller
         User::whereId($id)->update($form_data);
         // return redirect()->with('success', 'Data Added successfully!');
         // return Redirect::to('\admin')->with('success', 'Data Added successfully!');
-        return redirect('admin')->with('success', 'Data is successfully update !');
+        return redirect('employer')->with('success', 'Data is successfully update !');
 
     }
     
@@ -144,6 +144,6 @@ class AdminController extends Controller
     {
         $data = User::findOrFail($id);
         $data->delete();
-        return redirect('user')->with('success','Data is successfully deleted!');
+        return redirect('admin')->with('success','Data is successfully deleted!');
     }
 }

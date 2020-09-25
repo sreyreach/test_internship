@@ -22,7 +22,6 @@ class CreatePostjobTable extends Migration
             $table->string('closing_date');
             $table->longText('company_description');
             $table->longText('apply');
-            $table->string('job_type');
             $table->string('location_id');
             $table->longText('job_description');
             $table->string('company_profile');

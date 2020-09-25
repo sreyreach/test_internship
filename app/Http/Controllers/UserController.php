@@ -63,7 +63,7 @@ class UserController extends Controller
         );
 
         User::create($form_data);
-        return redirect('user')->with('success', 'Data Added successfully!');
+        return redirect('employer')->with('success', 'Data Added successfully!');
 
     }
     

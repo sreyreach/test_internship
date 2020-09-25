@@ -13,7 +13,7 @@ class EmployerController extends Controller
      */
     public function index()
     {
-        $user = User::where('role',2)->paginate(15);
+        $user = User::where('role',2)->latest()->paginate(10);
         return view('\admin\Employer\employer',['user' => $user]);
     }
 
@@ -61,7 +61,7 @@ class EmployerController extends Controller
         );
 
         User::create($form_data);
-        return redirect('user')->with('success', 'Data Added successfully!');
+        return redirect('employer')->with('success', 'Data Added successfully!');
     }
 
     /**

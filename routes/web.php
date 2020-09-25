@@ -93,17 +93,24 @@ Route::get('/home', 'JobTypeController@view');
 Route::resource('user','UserController'); 
 Auth::routes();
 Route::resource('admin','AdminController');
-Route::get('/user/{id}/destroy', 'AdminController@destroy');
+Route::get('/admin/{id}/destroy', 'AdminController@destroy');
 
 //employer
 Route::resource('employer','EmployerController');
-Route::get('/employer/{id}/destroy', 'AdminController@destroy');
+Route::get('/employer/{id}/destroy', 'EmployerController@destroy');
 
 //Admin Post
 Route::resource('post', 'AdminPostController');
+Route::get('/post/{id}/destroy', 'AdminPostController@destroy');
 
 //Admin Category
 Route::resource('admincategory','AdminCategoryController');
+Route::get('/category/{id}/destroy', 'AdminCategoryController@destroy');
 
 //Admin Location
 Route::resource('adminlocation','AdminLocationController');
+Route::get('/location/{id}/destroy', 'AdminLocationController@destroy');
+
+//Admin Job Type
+Route::resource('adminjobtype','AdminJobTypeController');
+Route::get('/jobtype/{id}/destroy', 'AdminJobTypeController@destroy');

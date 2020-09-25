@@ -38,10 +38,10 @@
 	        <div class="one-forth d-flex align-items-center ftco-animate js-fullheight">
 	        	<div class="text mt-5">
 	        		<p class="mb-4 mt-5 pt-5">We have <span class="number" data-number="200000">0</span> great job offers you deserve!</p>
-	            <h1 class="mb-5">Largets Job Site In The World</h1>
+	            	<h1 class="mb-5">Largets Job Site In The World</h1>
 
-							<div class="ftco-search">
-								<div class="row">
+					<div class="ftco-search">
+					<div class="row">
 			            <div class="col-md-12 nav-link-wrap">
 				            <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 				              <a class="nav-link active mr-md-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Find a Job</a>
@@ -65,9 +65,9 @@
 													<div class="icon"><span class="icon-briefcase"></span></div>
 													<select name="title" id="" class="form-control">
 														<option value="category">Category</option>
-														{{-- @foreach ( $category as $item)
+														@foreach ( $category as $item)
 														<option value="{{ $item->id }}">{{ $item->title}}</option>
-														@endforeach --}}
+														@endforeach
 													</select>
 												</div>
 											  </div>
@@ -78,12 +78,9 @@
 													  <div class="select-wrap">
 												  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 												  <select name="job_type" id="" class="form-control">
-													<option value="">Type of Job</option>
-													<option value="Full Tim">Full Time</option>
-													<option value="Part Time">Part Time</option>
-													<option value="Freelance">Freelance</option>
-													<option value="Internship">Internship</option>
-													<option value="Temporary">Temporary</option>
+													@foreach ( $jobtype as $item)
+														<option value="{{ $item->id }}">{{ $item->job_type}}</option>
+														@endforeach
 												  </select>
 												</div>
 												  </div>
@@ -94,32 +91,9 @@
 												  <div class="form-field">
 													  <div class="icon"><span class="icon-map-marker"></span></div>
 													<select name="location" id="" class="form-control" >
-														<option value="Location">Location</option>
-														<option value="Phnom Penh">Phnom Penh</option>
-														<option value="Banteay Meanchey">Banteay Meanchey</option>
-														<option value="Battambang">Battambang</option>
-														<option value="Kampong Cham">Kampong Cham</option>
-														<option value="Kampong Chhnang">Kampong Chhnang</option>
-														<option value="Kampong Som">Kampong Som</option>
-														<option value="Kampong Speu">Kampong Speu</option>
-														<option value="Kampong Thom">Kampong Thom</option>
-														<option value="Kampot">Kampot</option>
-														<option value="Kandal">Kandal</option>
-														<option value="Kep">Kep</option>
-														<option value="Koh Kong">Koh Kong</option>
-														<option value="Mondulkiri">Mondulkiri</option>
-														<option value="Oddar Meanchey">Oddar Meanchey</option>
-														<option value="Overseas">Overseas</option>
-														<option value="Pailin">Pailin</option>
-														<option value="Preah Vihear">Preah Vihear</option>
-														<option value="Prey Veng">Prey Veng</option>
-														<option value="Pursat">Pursat</option>
-														<option value="Ratanakiri">Ratanakiri</option>
-														<option value="Siem Reap">Siem Reap</option>
-														<option value="Steung Treng">Steung Treng</option>
-														<option value="Svay Rieng">Svay Rieng</option>
-														<option value="Takeo">Takeo</option>
-														<option value="Tbong Khmum">Tbong Khmum</option>
+														@foreach ( $location as $item)
+														<option value="{{ $item->id }}">{{ $item->location}}</option>
+														@endforeach
 													  </select>
 												  </div>
 											  </div>
@@ -185,7 +159,7 @@
 				          </div>
 				        </div>
 			        </div>
-	          </div>
+	          	</div>
 	        </div>
 	    	</div>
       </div>
@@ -212,7 +186,7 @@
 						<div data-v-552e6ab7="" class="job-item-sub-title">
 							{{ $item->company }}
 						</div> 
-						<span data-v-552e6ab7="" class="job-item-location">{{ $item->job_type }}&nbsp;&nbsp;&nbsp;	 {{ $item->location->location }}</span>
+						<span data-v-552e6ab7="" class="job-item-location">{{ $item->jobType->job_type }}&nbsp;&nbsp;&nbsp;	 {{ $item->location->location }}</span>
 						<br>
 						<span data-v-552e6ab7="" class="package__diamond">Top</span>
 						<span data-v-552e6ab7="" class="job-item-location">{{ $item->created_at }}</span>

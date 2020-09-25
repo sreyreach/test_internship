@@ -30,7 +30,7 @@
                
                 <li><a href="/register" class="py-2 d-block">Register</a></li> 
                 <li><a href="/login" class="py-2 d-block">Post a Job</a></li>
-                <li><a href="/" class="py-2 d-block">View Job</a></li>
+                <li><a href="/view_categories" class="py-2 d-block">View Job</a></li>
                 <li><a href="#" class="py-2 d-block">View CV</a></li>
                 <li><a href="#" class="py-2 d-block">CV Search</a></li>
                 </ul>
@@ -43,7 +43,7 @@
                 <li><a href="#" class="py-2 d-block">Register</a></li>
                 <li><a href="#" class="py-2 d-block">Post Your CV</a></li>
                 <li><a href="/" class="py-2 d-block">Job Search</a></li>
-                <li><a href="" class="py-2 d-block">View Job</a></li>
+                <li><a href="/view_categories" class="py-2 d-block">View Job</a></li>
                 <li><a href="#" class="py-2 d-block">View CV</a></li>
                 </ul>
             </div>

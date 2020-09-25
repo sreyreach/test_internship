@@ -36,7 +36,7 @@ class AuthControler extends Controller
             return response()->json(['error' => 'please chack your phone number and you password again'], 200);
         }
 
-        $credential = $request->only( 'images', 'phone_number', 'first_name', 'last_name','company_name','website', 'email', 'password');
+        $credential = $request->only( 'images', 'phone_number', 'first_name', 'last_name', 'email', 'password');
                 if ($request->hasFile('photo'))
                 {
                         $photo = $request->file('photo');    
@@ -52,7 +52,8 @@ class AuthControler extends Controller
         $request['password'] = Hash::make($request['password']);
         $api_token = Str::random(60);
         $request['api_token'] = $api_token;
-        $user = User::create($request->toArray());            
+        $user = User::create($request->toArray());  
+                 
         $api_token = $user->createToken('Laravel Password Grant Client')->accessToken;
         $response = ['api_token' => $api_token];
         return response()->json(['success'=>1,'user'=>$user]);   

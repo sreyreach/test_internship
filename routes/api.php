@@ -21,7 +21,7 @@ Route::get('/user','API\UserControler@index');
 Route::get('/user/{id}','API\UserControler@show');
 Route::post('/user/update/{id}','API\UserControler@update');
 Route::post('/user/updateprofile/{id}','API\UserControler@updateProfile');
-Route::get('/user/getDownloadProfile/{id}','API\UserControler@getDownloadphoto');
+Route::get('/user/getDownloadProfile/{id}/{updated_at}','API\UserControler@getDownloadphoto');
 
 //POST_JOB
 Route::post('/postjob/create','API\PostJobControler@store');

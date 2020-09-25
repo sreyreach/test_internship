@@ -13,7 +13,7 @@ class AdminLocationController extends Controller
      */
     public function index()
     {
-        $location = Location::paginate(13);
+        $location = Location::latest()->paginate(13);
         return view('\admin\location\location',['location' => $location]);
     }
 
@@ -24,7 +24,7 @@ class AdminLocationController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/location/create');
     }
 
     /**
@@ -35,7 +35,15 @@ class AdminLocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'location'             =>  'required',
+        ]);
+
+        $form_data = array(
+            'location'             => $request->location,
+        );
+        $location=Location::create($form_data);
+        return redirect('adminlocation')->with('success', 'Data Added successfully!');
     }
 
     /**
@@ -57,7 +65,8 @@ class AdminLocationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $locations = Location::findOrFail($id);
+        return view('\admin\location\edit', compact('locations'));
     }
 
     /**
@@ -69,7 +78,17 @@ class AdminLocationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'location'             =>  'required',
+        ]);
+
+        $form_data = array(
+            'location'             => $request->location,
+        );
+
+        $location=Location::whereId($id)->update($form_data);
+        return redirect('adminlocation')->with('success', 'Data Added successfully!');
+
     }
 
     /**
@@ -80,6 +99,8 @@ class AdminLocationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data =Location::findOrFail($id);
+        $data->delete();
+        return redirect('adminlocation')->with('success','Data is successfully deleted!');
     }
 }

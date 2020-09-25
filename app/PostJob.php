@@ -18,4 +18,9 @@ class PostJob extends Model
     {
         return $this->belongsTo('App\Location');
     }
+
+    public function jobType()
+    {
+        return $this->belongsTo('App\JobType');
+    }
 }

@@ -45,7 +45,7 @@
                            
                     <a title="Show info" href="{{ route('admin.edit', $data)}}"><span class="fa fa-pencil"></span> </a> |
 
-                    <a class="delete_confirm" href="{{ url('/user/'.$data->id.'/destroy') }}" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a>
+                    <a class="delete_confirm" href="{{ url('/admin/'.$data->id.'/destroy') }}" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a>
                 </td>
             </tr>
         @endforeach

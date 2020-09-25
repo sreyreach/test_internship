@@ -10,4 +10,5 @@ class JobType extends Model
     protected $fillable = [
         'job_type',
      ];
+
 }

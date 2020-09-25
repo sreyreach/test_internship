@@ -86,6 +86,13 @@
                     <h2 class="item-title">Add Location</h2>
                 </div>
             </a>
+            <a href="{{ route('adminjobtype.index')}}">
+                <div id="messages" class="item ">
+                    {{-- <img class="item-icon" src="/images/locat.png"/> --}}
+                    <span class="fa fa-plus" style="color: #fff; margin-left:15%; margin-top:5%"></span>
+                    <h2 class="item-title">Add Job Type</h2>
+                </div>
+            </a>
             <a href="#">
                 <div id="messages" class="item ">
                     {{-- <img class="item-icon" src="/images/locat.png"/> --}}

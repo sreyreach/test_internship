@@ -26,11 +26,11 @@
    <table class="table table-hover tablesorter" id="tblRoom">
        <thead>
            <tr>
-               <th>№</th>
+               {{-- <th>№</th> --}}
                <th>Photo</th>
-               <th name="title">Title</th>
-               <th name="job_type">Job Type</i></th>
-               <th name="company">Company Name</th>
+               <th name="title" width="20%">Title</th>
+               <th name="job_type" width="5%">Job Type</i></th>
+               <th name="company" width="15%">Company Name</th>
                <th name="lacation_id">Location</th>
                <th name="post_date">Post date</th>
                <th name="closing_date">Closing date</th>
@@ -41,12 +41,12 @@
        <tbody>
         @foreach ($postjob as $data)
             <tr>
-            <td>{{ $data->id }}</td>
+            {{-- <td>{{ $data->id }}</td> --}}
             <td style="text-align:center">
                 <img src="{{ URL::to('/') }}/images//{{ $data->company_profile}}"class="img-thumbnail" width="75"/>
             </td>
             <td>{{ $data->title              }}</td>
-            <td>{{ $data->job_type           }}</td>
+            <td>{{ $data->jobType->job_type  }}</td>
             <td>{{ $data->company            }}</td>
             <td>{{ $data->location->location }}</td>
             <td>{{ $data->post_date          }}</td>
@@ -58,7 +58,7 @@
                            
                     <a title="Show info" href="#"><span class="fa fa-pencil"></span></a> |
 
-                    <a class="delete_confirm" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a>
+                    <a class="delete_confirm" href="{{ url('/post/'.$data->id.'/destroy') }}" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a>
                 </td>
             </tr>
         @endforeach

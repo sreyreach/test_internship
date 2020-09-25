@@ -21,7 +21,7 @@
             <span class="panel-title">
                 <span  style=" margin-left:1%"></span></span>
             <div class="pull-right">
-                <a href="#">
+                <a href="{{ route('adminlocation.create')}}">
                 <span class="fa fa-plus" style="color:#fff; margin-left:-15%"></span>
             </a>
             </div>
@@ -32,7 +32,7 @@
        <thead>
            <tr>
                <th>№</th>
-               <th name="email">Location</th>
+               <th name="location">Location</th>
                <th>Action</th>
            </tr>
        </thead>
@@ -42,11 +42,11 @@
             <td>{{ $data->id }}</td>
             <td>{{ $data->location}}</td>
                 <td class="icon-button">
-                    <a title="show info" href="#"><span class="fa fa fa-book text-yellow"></span> </a> &nbsp;|&nbsp; 
+                    {{-- <a title="show info" href="#"><span class="fa fa fa-book text-yellow"></span> </a> &nbsp;|&nbsp;  --}}
                            
-                    <a title="edit" href="#"><span class="fa fa-pencil"></span> </a> |
+                    <a title="edit" href="{{ route('adminlocation.edit', $data)}}"><span class="fa fa-pencil"></span> </a> |
 
-                    <a class="delete_confirm" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a>
+                    <a class="delete_confirm" href="{{ url('/location/'.$data->id.'/destroy') }}" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a>
                 </td>
             </tr>
         @endforeach

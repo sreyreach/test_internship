@@ -19,17 +19,20 @@ class PostJobController extends Controller
      */
     public function index()
     {
-        $job = PostJob::where('user_id', Auth::User()->id);
+        $job = PostJob::where('user_id', Auth::User()->id)->get();
         return view('\my_post', compact('jobs'));
     }
 
     public function view(){
-        $jobs = PostJob::get();
-        return view('\index',['jobs' => $jobs]);
+        $jobs = PostJob::latest();
+        return view('\index', compact('jobs'));
     }
      public function hotjob(){
-        $jobs = PostJob::get();
-        return view('\index',['jobs' => $jobs]);
+        $jobs = PostJob::orderBy('updated_at', 'DESC')->get();
+        $location = Location::get();
+        $category = Catagory::get();
+        $jobtype  = JobType::get();
+        return view('\index',compact('jobs','location','category','jobtype'));
     }
     public function  categories(){
         $jobs = PostJob::get();
@@ -38,7 +41,7 @@ class PostJobController extends Controller
     }
     
     public function  profile(){
-        $jobs = PostJob::where("user_id",Auth::user()->id)->get();
+        $jobs = PostJob::where("user_id",Auth::user()->id)->orderBy('updated_at', 'DESC')->get();
         return view('\my_post',['jobs' => $jobs]);
     }
     /**
@@ -61,17 +64,17 @@ class PostJobController extends Controller
     {
         //dd($request->All());
         $request->validate([
-            'title'             =>  'required',
-            'category_id'      =>  'required',
-            'company'           => 'required',
+            'title'               =>  'required',
+            'category_id'         =>  'required',
+            'company'             => 'required',
             'post_date'           => 'required',
-            'closing_date'           => 'required',
-            'company_description'    => 'required',
-            'apply'                 => 'required',
-            'job_type_id'          =>  'required',
-            'location_id'          =>  'required',
-            'job_description'   =>  'required',
-            'company_profile'  => 'required|image|max:2048',
+            'closing_date'        => 'required',
+            'company_description' => 'required',
+            'apply'               => 'required',
+            'job_type_id'         =>  'required',
+            'location_id'         =>  'required',
+            'job_description'     =>  'required',
+            'company_profile'     => 'required|image|max:2048',
         ]);
         
         $image = $request->file('company_profile');
@@ -79,18 +82,17 @@ class PostJobController extends Controller
         $image->move(public_path('images'), $new_name);
 
         $form_data = array(
-            'title'             => $request->title,
-            'category_id'       => $request->category_id,
-            'company'           => $request->company,
+            'title'               => $request->title,
+            'category_id'         => $request->category_id,
+            'company'             => $request->company,
             'post_date'           => $request->post_date,
-            'closing_date'           => $request->closing_date,
-            'company_description'    => $request->company_description,
-            'apply'           => $request->apply,
-            'job_type_id'          => $request->job_type_id,
-            'location_id'          => $request->location_id,
-            'job_description'   => $request->job_description,
-            'user_id'           => Auth::user()->id,
-            
+            'closing_date'        => $request->closing_date,
+            'company_description' => $request->company_description,
+            'apply'               => $request->apply,
+            'job_type_id'         => $request->job_type_id,
+            'location_id'         => $request->location_id,
+            'job_description'     => $request->job_description,
+            'user_id'             => Auth::user()->id,
             'company_profile'   =>  $new_name,
         );
 
@@ -196,17 +198,17 @@ class PostJobController extends Controller
 
     public function search(Request $request)
     { 
-        $location = $request->location;
-        $title = $request->title;
-        $job_type = $request->job_type;
-        $locationSearch = DB::table('postjob')->where('location',$location);
-        $titleSearch = DB::table('postjob')->where('title',$title);
-        $job_typeSearch = DB::table('postjob')->where('job_type',$job_type);
+        $location_id = $request->location_id;
+        $category_id = $request->category_id;
+        $job_type_id = $request->job_type_id;
+        $locationSearch = DB::table('postjob')->where('location_id',$location_id);
+        $titleSearch = DB::table('postjob')->where('category_id',$category_id);
+        $job_typeSearch = DB::table('postjob')->where('job_type_id',$job_type_id);
         $result_search = $locationSearch->union($titleSearch)->union($job_typeSearch)->get();
 
-        $jobs = DB::table('postjob')->where('location','=', "%{$location}")
-        ->orwhere('title','like', "%{$title}")
-        ->orwhere('job_type','=', "%{$job_type}")
+        $jobs = DB::table('postjob')->where('location_id','=', "%{$location_id}")
+        ->orwhere('category_id','like', "%{$category_id}")
+        ->orwhere('job_type_id','=', "%{$job_type_id}")
         ->get();
         return view('\index', compact('jobs'));
           

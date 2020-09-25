@@ -2,18 +2,18 @@
 <div class="row-1" style=" margin-left: 300% ; margin: 10%;  height: auto; background-color:#e6ffff ; width:70%">
     
     <div data-v-552e6ab7="" class="uk-flex inner-item" >
-       <div id="left" style="background-color:#e6ffff">
+       {{-- <div id="left" style="background-color:#e6ffff"> --}}
             <div data-v-552e6ab7="" class="section-1">
                 <div data-v-552e6ab7="" class="img-wrapper" style="margin:10%; ">
                     {{-- {{ $jobs->company_profile }} --}}
                     {{-- <img data-v-552e6ab7="" src="https://pelprek.sgp1.digitaloceanspaces.com/logo/2193/small-153371691554338.png" class="logo"> --}}
-                    <img src="{{ URL::to('/') }}/images//{{ $jobs->company_profile}}"class="img-thumbnail" width="300"  class="logo" style="margin-left: 10% ; margin-top:20%"/>
+                    <img src="{{ URL::to('/') }}/images//{{ $jobs->company_profile}}"class="img-thumbnail" width="200" height="100"  class="logo" style="margin-left: 10% ; margin-top:20%"/>
                 </div>
             </div>
-        </div>
-       <div id="right">   
-       
-            <div data-v-552e6ab7="" class="section-2"style="margin-top:20%; margin-left:-27%" >
+        {{-- </div> --}}
+       {{-- <div id="right">   
+        --}}
+            <div data-v-552e6ab7="" class="section-2"style="margin-top:25%; margin-left:-17%" >
                 <div data-v-552e6ab7="" style="overflow: hidden;">
                     <h2 data-v-552e6ab7="" class="job-item-title1" style=" font-weight: 700; color:royalblue; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif; font-size: revert;"> 
                         {{ $jobs->title }} 
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>    
-        </div>    
+        {{-- </div>     --}}
       <hr>
         <div data-v-552e6ab7="" class="section-2" style="margin-left: 5%">
             <div data-v-552e6ab7="" style="overflow: hidden;">
@@ -40,7 +40,7 @@
         </div>
         <div data-v-552e6ab7="" class="section-2" style="margin-left: 5%">
             <div data-v-552e6ab7="" style="overflow: hidden;">
-                <h6 data-v-552e6ab7="" class="job-item-title1">Job Type:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $jobs->job_type }} </h6> 
+                <h6 data-v-552e6ab7="" class="job-item-title1">Job Type:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $jobs->jobType->job_type }} </h6> 
             </div>
         </div>
         <div data-v-552e6ab7="" class="section-2" style="margin-left: 5%">

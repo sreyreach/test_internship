@@ -21,7 +21,7 @@
             <span class="panel-title">
                 <span  style=" margin-left:1%"></span></span>
             <div class="pull-right">
-                <a href="#">
+                <a href="{{ route('adminjobtype.create')}}">
                 <span class="fa fa-plus" style="color:#fff; margin-left:-15%"></span>
             </a>
             </div>
@@ -42,11 +42,11 @@
             <td>{{ $data->id }}</td>
             <td>{{ $data->job_type}}</td>
                 <td class="icon-button">
-                    <a title="show info" href="#"><span class="fa fa fa-book text-yellow"></span> </a> &nbsp;|&nbsp; 
+                    {{-- <a title="show info" href="#"><span class="fa fa fa-book text-yellow"></span> </a> &nbsp;|&nbsp;  --}}
                            
-                    <a title="edit" href="#"><span class="fa fa-pencil"></span> </a> |
+                    <a title="edit" href="{{ route('adminjobtype.edit', $data)}}"><span class="fa fa-pencil"></span> </a> |
 
-                    <a class="delete_confirm" href="#" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a>
+                    <a class="delete_confirm" href="{{ url('/jobtype/'.$data->id.'/destroy') }}" onclick="return confirm('Are you sure you want to delete this item?');"><span class="fa fa-trash"></span> </a>
                 </td>
             </tr>
         @endforeach

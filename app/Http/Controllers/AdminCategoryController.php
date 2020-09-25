@@ -13,7 +13,7 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $category = Catagory::paginate(13);
+        $category = Catagory::latest()->paginate(13);
         return view('\admin\category\job_title',['category' => $category]);
         // ->with('i', (request()->input('page',1) -1) *5);
     }
@@ -45,7 +45,7 @@ class AdminCategoryController extends Controller
         );
 
         $category=Catagory::create($form_data);
-        return redirect('category')->with('success', 'Data Added successfully!');
+        return redirect('admincategory')->with('success', 'Data Added successfully!');
     }
 
     /**
@@ -67,7 +67,8 @@ class AdminCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Catagory::findOrFail($id);
+        return view('\admin\category\edit', compact('category'));
     }
 
     /**
@@ -79,7 +80,16 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'             =>  'required',
+        ]);
+
+        $form_data = array(
+            'title'             => $request->title,
+        );
+
+        $category=Catagory::whereId($id)->update($form_data);
+        return redirect('admincategory')->with('success', 'Data Added successfully!');
     }
 
     /**
@@ -90,6 +100,8 @@ class AdminCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Catagory::findOrFail($id);
+        $data->delete();
+        return redirect('admincategory')->with('success','Data is successfully deleted!');
     }
 }

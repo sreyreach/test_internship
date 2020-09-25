@@ -9,16 +9,16 @@
     </ul>
 </div>
 @endif
-<form method="post" id="form" action="{{ route('category.store')}}" enctype="multipart/form-data" style="margin:80px" >
+<form method="post" id="form" action="{{ route('admincategory.store')}}" enctype="multipart/form-data" style="margin:80px" >
 
     @csrf
     <div class="form-group">
         <div class="row">
-                <h2 style="color:#334d4d; margin-left: 200px;margin-top: -50px;">Create <b>User</b></h2>
+                <h2 style="color:#334d4d; margin-left: 200px;margin-top: -50px;"><b style="font-size: x-large;">Add Category</b></h2>
         </div>
-        <label class="class= text1">Title</label>
+        <label class="class= text1" style="margin-left: 80px;"><b>Title</label>
         <div class="col1">
-            <input type="text" name="tilte" value="{{ old('tile') }}" class="form-control input-lg"/>
+            <input type="text" name="title" value="{{ old('title') }}" class="form-control input-lg" style="    margin-left: -150px"/>
         </div>
         
         <div class="form-group text-center">

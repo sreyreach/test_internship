@@ -13,7 +13,7 @@ class AdminJobTypeController extends Controller
      */
     public function index()
     {
-        $jobtype = JobType::paginate(13);
+        $jobtype = JobType::latest()->paginate(13);
         return view('\admin\job_type\job_type',['jobtype' => $jobtype]);
     }
 
@@ -24,7 +24,7 @@ class AdminJobTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.job_type.create');
     }
 
     /**
@@ -35,7 +35,16 @@ class AdminJobTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'job_type'             =>  'required',
+        ]);
+
+        $form_data = array(
+            'job_type'             => $request->job_type,
+        );
+
+        $jobtype=JobType::create($form_data);
+        return redirect('adminjobtype')->with('success', 'Data Added successfully!');
     }
 
     /**
@@ -57,7 +66,8 @@ class AdminJobTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jobtype =JobType::findOrFail($id);
+        return view('\admin\job_type\edit', compact('jobtype'));
     }
 
     /**
@@ -69,7 +79,16 @@ class AdminJobTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'job_type'             =>  'required',
+        ]);
+
+        $form_data = array(
+            'job_type'             => $request->job_type,
+        );
+
+        $jobtype=JobType::whereId($id)->update($form_data);
+        return redirect('adminjobtype')->with('success', 'Data Added successfully!');
     }
 
     /**
@@ -80,6 +99,8 @@ class AdminJobTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data =JobType::findOrFail($id);
+        $data->delete();
+        return redirect('adminjobtype')->with('success','Data is successfully deleted!');
     }
 }
