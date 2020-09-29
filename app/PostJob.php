@@ -23,4 +23,9 @@ class PostJob extends Model
     {
         return $this->belongsTo('App\JobType');
     }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Catagory');
+    }
 }

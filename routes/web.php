@@ -48,7 +48,7 @@ Route::get('edit/postjob/{id}', 'PostJobController@edit');
 Route::post('update/postjob/{id}', 'PostJobController@update');
 Route::get('/destroy/{id}','PostJobController@destroy');
 
-Route::post('/search', 'PostJobController@search');
+Route::get('/search', 'PostJobController@search');
 Auth::routes();
 Route::get('/my_post', 'PostJobController@profile');
 Route::get('/home', 'HomeController@index')->name('home');

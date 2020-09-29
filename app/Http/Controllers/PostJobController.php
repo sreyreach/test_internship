@@ -28,7 +28,34 @@ class PostJobController extends Controller
         return view('\index', compact('jobs'));
     }
      public function hotjob(){
-        $jobs = PostJob::orderBy('updated_at', 'DESC')->get();
+        // $jobs = PostJob::orderBy('updated_at', 'DESC')->get();
+        $jobs = DB::table('postjob')
+        ->leftjoin('category','postjob.category_id','category.id')
+        ->leftjoin('job_type','postjob.job_type_id','job_type.id')
+        ->leftjoin('location','postjob.location_id','location.id')
+        ->select(
+            'postjob.id',
+            'postjob.company_profile',
+            'postjob.title',
+            'category.title AS job_title',
+            'job_type.job_type',
+            'postjob.job_description',
+            'postjob.company_description',
+            'postjob.apply',
+            'postjob.company_profile',
+            'postjob.post_date',
+            'postjob.closing_date',
+            'location.location',
+            'postjob.company',
+            'postjob.created_at',
+            'postjob.updated_at',
+            'postjob.user_id'
+        )
+    ->orderByDesc('postjob.updated_at')
+    // ->where('location_id','=', 'postjob.location_id')
+    // ->orwhere('category_id','=', 'postjob.category_id')
+    // ->orwhere('job_type_id','=', "postjob.job_type_id")
+    ->get();
         $location = Location::get();
         $category = Catagory::get();
         $jobtype  = JobType::get();
@@ -196,27 +223,74 @@ class PostJobController extends Controller
     //             ->with('i', (request()->input('page',1) -1) *5);
     // } 
 
-    public function search(Request $request)
-    { 
-        $location_id = $request->location_id;
-        $category_id = $request->category_id;
-        $job_type_id = $request->job_type_id;
-        $locationSearch = DB::table('postjob')->where('location_id',$location_id);
-        $titleSearch = DB::table('postjob')->where('category_id',$category_id);
-        $job_typeSearch = DB::table('postjob')->where('job_type_id',$job_type_id);
-        $result_search = $locationSearch->union($titleSearch)->union($job_typeSearch)->get();
+    // public function search(Request $request)
+    // { 
+    //     $category_id = $request->category_id;
+    //     $location_id = $request->location_id;
+    //     $job_type_id = $request->job_type_id;
+    //     $titleSearch = DB::table('postjob')->where('category_id',$category_id);
+    //     $locationSearch = DB::table('postjob')->where('location_id',$location_id);
+    //     $job_typeSearch = DB::table('postjob')->where('job_type_id',$job_type_id);
+    //     $result_search = $locationSearch->union($titleSearch)->union($job_typeSearch)->get();
 
-        $jobs = DB::table('postjob')->where('location_id','=', "%{$location_id}")
-        ->orwhere('category_id','like', "%{$category_id}")
-        ->orwhere('job_type_id','=', "%{$job_type_id}")
-        ->get();
-        return view('\index', compact('jobs'));
-          
+    //     $jobs = DB::table('postjob')->where('location_id','=', "%{$location_id}")
+    //     ->orwhere('category_id','like', "%{$category_id}")
+    //     ->orwhere('job_type_id','=', "%{$job_type_id}")
+    //     ->get();
+    //     $category = Catagory::get();
+    //     $location = Location::get();
+    //     $jobtype  = JobType::get();
+    //     return view('\index', compact('jobs','category','location','jobtype'));
+    // }
+
+    // public function search(Request $request)
+    // { 
+    //     //dd($request->all());
+    //         $job_type  = $request->job_type;
+    //         $location  = $request->location;
+    //         $job_title = $request->title;
+    //             $jobs = DB::table('postjob')
+    //             ->leftjoin('category','postjob.category_id','category.id')
+    //             ->leftjoin('job_type','postjob.job_type_id','job_type.id')
+    //             ->leftjoin('location','postjob.location_id','location.id')
+    //             ->select(
+    //                 'postjob.id',
+    //                 'postjob.company_profile',
+    //                 'postjob.title',
+    //                 'category.title AS job_title',
+    //                 'job_type.job_type',
+    //                 'postjob.job_description',
+    //                 'postjob.company_description',
+    //                 'postjob.apply',
+    //                 'postjob.company_profile',
+    //                 'postjob.post_date',
+    //                 'postjob.closing_date',
+    //                 'location.location',
+    //                 'postjob.company',
+    //                 'postjob.created_at',
+    //                 'postjob.updated_at',
+    //                 'postjob.user_id'
+    //             )
+    //         ->orderByDesc('postjob.updated_at')
+    //         ->where('postjob.location_id', $location)
+    //         ->orwhere('postjob.category_id', $job_title)
+    //         ->orwhere('postjob.job_type_id', $job_type)
+    //         ->get();
+    //         //dd($jobs);
+    //         $category = Catagory::get();
+    //         $location = Location::get();
+    //         $jobtype  = JobType::get();
+    //        // $jobs = Job::get();
+    //     // return view('\index', compact('jobs','category','location','jobtype'));
+    //         return view('\index', compact('jobs','category','location','jobtype'));
+        
+    //     }
     }
-    
+
     // public function get_category($id){
     //     $job = PostJob::findOrFail(2);
     //     return view('\post_job.view_categories',compact('jobs'));
     // }
+
       
-}
+

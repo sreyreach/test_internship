@@ -38,7 +38,7 @@
 	        <div class="one-forth d-flex align-items-center ftco-animate js-fullheight">
 	        	<div class="text mt-5">
 	        		<p class="mb-4 mt-5 pt-5">We have <span class="number" data-number="200000">0</span> great job offers you deserve!</p>
-	            	<h1 class="mb-5">Largets Job Site In The World</h1>
+	            	<h1 class="mb-5">Largest Job Site In The Country</h1>
 
 					<div class="ftco-search">
 					<div class="row">
@@ -55,7 +55,7 @@
 				            <div class="tab-content p-4" id="v-pills-tabContent">
 
 				              <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-								<form method="post" action="\search" class="search-job">
+								<form method="get" action="\search" class="search-job">
 									@csrf
 									  <div class="row no-gutters">
 										  <div class="col-md mr-md-2">
@@ -64,9 +64,8 @@
 													<div class="icon"><span class="ion-ios-arrow-down"></span></div>
 													<div class="icon"><span class="icon-briefcase"></span></div>
 													<select name="title" id="" class="form-control">
-														<option value="category">Category</option>
 														@foreach ( $category as $item)
-														<option value="{{ $item->id }}">{{ $item->title}}</option>
+														<option value="{{ $item->id }}" @if(Request::query('title') == $item->id ) selected  @endif>{{ $item->title}}</option>
 														@endforeach
 													</select>
 												</div>
@@ -79,7 +78,7 @@
 												  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
 												  <select name="job_type" id="" class="form-control">
 													@foreach ( $jobtype as $item)
-														<option value="{{ $item->id }}">{{ $item->job_type}}</option>
+														<option value="{{ $item->id }}" @if(Request::query('job_type') == $item->id ) selected  @endif>{{ $item->job_type}}</option>
 														@endforeach
 												  </select>
 												</div>
@@ -92,7 +91,7 @@
 													  <div class="icon"><span class="icon-map-marker"></span></div>
 													<select name="location" id="" class="form-control" >
 														@foreach ( $location as $item)
-														<option value="{{ $item->id }}">{{ $item->location}}</option>
+														<option value="{{ $item->id }}" @if(Request::query('location') == $item->id ) selected  @endif>{{ $item->location}}</option>
 														@endforeach
 													  </select>
 												  </div>
@@ -186,7 +185,7 @@
 						<div data-v-552e6ab7="" class="job-item-sub-title">
 							{{ $item->company }}
 						</div> 
-						<span data-v-552e6ab7="" class="job-item-location">{{ $item->jobType->job_type }}&nbsp;&nbsp;&nbsp;	 {{ $item->location->location }}</span>
+						<span data-v-552e6ab7="" class="job-item-location">{{ $item->job_type }}&nbsp;&nbsp;&nbsp;	 {{ $item->location }}</span>
 						<br>
 						<span data-v-552e6ab7="" class="package__diamond">Top</span>
 						<span data-v-552e6ab7="" class="job-item-location">{{ $item->created_at }}</span>

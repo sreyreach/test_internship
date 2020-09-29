@@ -28,7 +28,6 @@ class PostJobControler extends Controller
     public function index(Request $request)
     {
         $job_type=$request->job_type;
-       
         $location = $request->location;
         $job_title = $request->job_title;
         
@@ -96,13 +95,13 @@ class PostJobControler extends Controller
             return $this->getPostJobByTwoParam("postjob.job_type_id",$job_type_id,'postjob.location_id',$location_id);
         }else{
             $job_type_list = DB::table('job_type')->where('job_type',$job_type)->get();
-        $job_type_id = $job_type_list[0]->id;
+            $job_type_id = $job_type_list[0]->id;
 
-        $job_title_list = DB::table('category')->where('title',$job_title)->get();
-        $job_title_id = $job_title_list[0]->id;
+            $job_title_list = DB::table('category')->where('title',$job_title)->get();
+            $job_title_id = $job_title_list[0]->id;
 
-        $location_list = DB::table('location')->where('location',$location)->get();
-        $location_id = $location_list[0]->id;
+            $location_list = DB::table('location')->where('location',$location)->get();
+            $location_id = $location_list[0]->id;
             return $this->getPostJobByTreeParam("postjob.job_type_id",$job_type_id,'postjob.location_id',$location_id,"postjob.category_id",$job_title_id);
         }
         

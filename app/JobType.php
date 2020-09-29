@@ -11,4 +11,10 @@ class JobType extends Model
         'job_type',
      ];
 
+     public function jobType()
+    {
+        return $this->belongsTo('App\JobType');
+    }
+
+
 }
