@@ -39,12 +39,6 @@ class UserControler extends Controller
         $form_data = array(
             
             'images'       => $request->images  = "profiles/".$new_name,
-            'first_name'   => $request->first_name,
-            'last_name'    => $request->last_name,
-            'company_name' => $request->company_name,
-            'phone_number' => $request->phone_number,
-            'website'      => $request->website,
-            'email'        => $request->email,
         ); 
         User::where('id',$id)->update($form_data);
         $user = User::findOrFail($id); 
