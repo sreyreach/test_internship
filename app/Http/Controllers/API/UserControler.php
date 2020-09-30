@@ -19,8 +19,7 @@ class UserControler extends Controller
     }
 
     public function update(Request $request, $id){
-        $credential = $request->only('images', 'phone_number', 'first_name', 'last_name',
-        'company_name','website', 'email', 'password');
+        $credential = $request->only( 'phone_number', 'first_name', 'last_name', 'email','company_name','website');
             if ($request->hasFile('photo'))
             {
                 $photo = $request->file('photo');    
@@ -29,15 +28,13 @@ class UserControler extends Controller
                 $request['images'] = $new_name;
 
             }else{
-                return response()->json(['error'=>'Unauthorised'], 401);
-            }
-        //return $credential;
-        // if ('Auth'::attempt($credential)) 
-        // {
-        //     return response()->json(['error'=>'Unauthorised'], 401);
-        // } 
+                $form_data = $request->toArray();
+                User::where('id',$id)->update($form_data);
+                $user = User::findOrFail($id); 
+        
+                return response()->json($user);
+            } 
         $form_data = array(
-            
             'images'       => $request->images  = "profiles/".$new_name,
         ); 
         User::where('id',$id)->update($form_data);
@@ -64,7 +61,6 @@ class UserControler extends Controller
             return response()->json(['error'=>'Unauthorised'], 401);
         }
         $form_data = array(
-            // 'images' => $new_name,
             'images' => $request->images  = "profiles/".$new_name,
         );
 
@@ -73,15 +69,6 @@ class UserControler extends Controller
          
         return response()->json($user);
     }
-
-    // public function getDownloadProfile($id)
-    // { 
-    //     $user = User::findOrFail($id);
-
-    //     $file_path = public_path('profiles/'.$user->images);
-    //     return response()->download($file_path);
-
-    // }
     public function getDownloadphoto($id)
     {
         $user = User::findOrFail($id);
@@ -89,16 +76,5 @@ class UserControler extends Controller
         $file_path = public_path($user->images);
         return response()->download($file_path);
     }
-    // public function getDownload($id)
-    // {
-    //     // $user = User::findOrFail($id)->first;
-    //     // return response()->json($user,200);
-    //     $user = PostJob::findOrFail($id);
-
-    //     $file_path = public_path('images/'.$user->company_profile);
-    //     return response()->download($file_path);
-
-    //    // return response()->json($user->image);
-    // }
  
 }
