@@ -14,7 +14,7 @@ class AddColumnToPostJobTable extends Migration
     public function up()
     {
         Schema::table('postjob', function (Blueprint $table) {
-            $table->string('job_type_id')->after('job_type')->nullable();
+            $table->string('job_type_id')->after('closing_date')->nullable();
         });
     }
 
