@@ -67,3 +67,11 @@ Route::group(["middleware" => ['auth:api']], function () {
 
 
 });
+
+//get data for filter
+//Location
+Route::get('/getLocation','API\GetDataForFilterController@getLocation');
+//Category
+Route::get('/getCategory','API\GetDataForFilterController@getCategory');
+//Job Type
+Route::get('/getJobtype','API\GetDataForFilterController@getJobtype');
