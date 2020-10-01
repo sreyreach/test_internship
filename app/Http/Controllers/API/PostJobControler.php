@@ -256,6 +256,21 @@ class PostJobControler extends Controller
 
     public function update(Request $request, $id)
     {     
+        $job_type=$request->job_type_id;
+        $job_type_list = DB::table('job_type')->where('job_type',$job_type)->get();
+        $job_type_id = $job_type_list[0]->id;
+        $request->job_type_id = $job_type_id;
+
+        $job_title = $request->category_id;
+        $job_title_list = DB::table('category')->where('title',$job_title)->get();
+        $job_title_id = $job_title_list[0]->id;
+        $request->category_id = $job_title_id;
+
+        $location = $request->location_id;
+        $location_list = DB::table('location')->where('location',$location)->get();
+        $location_id = $location_list[0]->id;
+        $request->location_id = $location_id;
+
         $credential = $request->only( 'title', 'company', 'job_type', 'location', 'job_description',
        'user_id','company_profile','post_date','closing_date','company_description','apply');
         
@@ -270,16 +285,15 @@ class PostJobControler extends Controller
         }
           
         $form_data = array(
-            'id'                  => $request->id,
             'title'               => $request->title,
-            'category_id'         => $request->categoty_id,
+            'category_id'         => $job_title_id,
             'company'             => $request->company,
             'post_date'           => $request->post_date,
             'closing_date'        => $request->closing_date,
             'company_description' => $request->company_description,
             'apply'               => $request->apply,
-            'job_type_id'         => $request->job_type,
-            'location_id'         => $request->location_id,
+            'job_type_id'         => $job_type_id,
+            'location_id'         => $location_id,
             'job_description'     => $request->job_description,
             'company_profile'     =>  $new_name,
         ); 
