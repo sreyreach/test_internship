@@ -22,6 +22,7 @@ Route::get('/user/{id}','API\UserControler@show');
 Route::post('/user/update/{id}','API\UserControler@update');
 Route::post('/user/updateprofile/{id}','API\UserControler@updateProfile');
 Route::get('/user/getDownloadProfile/{id}/{updated_at}','API\UserControler@getDownloadphoto');
+Route::Post('/user/changePassword','API\UserControler@changePassword');
 
 //POST_JOB
 Route::post('/postjob/create','API\PostJobControler@store');

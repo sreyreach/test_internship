@@ -5,6 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserControler extends Controller
 {
@@ -75,6 +78,27 @@ class UserControler extends Controller
 
         $file_path = public_path($user->images);
         return response()->download($file_path);
+    }
+
+    public function changePassword(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'newPassword' => 'required|confirmed|min:6',
+        ]);
+        if($validator->fails()){
+            return 3;
+        }
+
+        $credential = $request->only('id','password');
+        if ('Auth'::attempt($credential)) {
+
+            $newPassword['password'] = Hash::make($request['newPassword']);
+            DB::table('users')->where('id',$request->id)->update($newPassword);
+            $user=DB::table('users')->where('id',$request->id)->get();
+            return $user;
+        }else{
+            return "password incorrect";
+        }
     }
  
 }
