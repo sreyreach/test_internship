@@ -20,6 +20,7 @@ class PostJobController extends Controller
     public function index()
     {
         $job = PostJob::where('user_id', Auth::User()->id)->get();
+      
         return view('\my_post', compact('jobs'));
     }
 
@@ -47,8 +48,8 @@ class PostJobController extends Controller
             'postjob.closing_date',
             'location.location',
             'postjob.company',
-            'postjob.created_at',
-            'postjob.updated_at',
+            DB::raw('DATE_FORMAT(postjob.created_at, "%Y-%b-%d %h:%i %p") as created_at'),
+            DB::raw('DATE_FORMAT(postjob.updated_at, "%Y-%b-%d %H:%i %p") as updated_at'),
             'postjob.user_id'
         )
     ->orderByDesc('postjob.updated_at')
@@ -56,6 +57,7 @@ class PostJobController extends Controller
     // ->orwhere('category_id','=', 'postjob.category_id')
     // ->orwhere('job_type_id','=', "postjob.job_type_id")
     ->get();
+    //dd($jobs);
         $location = Location::get();
         $category = Catagory::get();
         $jobtype  = JobType::get();
@@ -223,25 +225,52 @@ class PostJobController extends Controller
     //             ->with('i', (request()->input('page',1) -1) *5);
     // } 
 
-    // public function search(Request $request)
-    // { 
-    //     $category_id = $request->category_id;
-    //     $location_id = $request->location_id;
-    //     $job_type_id = $request->job_type_id;
-    //     $titleSearch = DB::table('postjob')->where('category_id',$category_id);
-    //     $locationSearch = DB::table('postjob')->where('location_id',$location_id);
-    //     $job_typeSearch = DB::table('postjob')->where('job_type_id',$job_type_id);
-    //     $result_search = $locationSearch->union($titleSearch)->union($job_typeSearch)->get();
-
-    //     $jobs = DB::table('postjob')->where('location_id','=', "%{$location_id}")
-    //     ->orwhere('category_id','like', "%{$category_id}")
-    //     ->orwhere('job_type_id','=', "%{$job_type_id}")
-    //     ->get();
-    //     $category = Catagory::get();
-    //     $location = Location::get();
-    //     $jobtype  = JobType::get();
-    //     return view('\index', compact('jobs','category','location','jobtype'));
-    // }
+    public function search(Request $request)
+    { 
+        $job_type  = $request->job_type;
+        $location  = $request->location;
+        $job_title = $request->title;
+        $jobs = DB::table('postjob')
+        ->leftjoin('category','postjob.category_id','category.id')
+        ->leftjoin('job_type','postjob.job_type_id','job_type.id')
+        ->leftjoin('location','postjob.location_id','location.id')
+        ->select(
+            'postjob.id',
+            'postjob.company_profile',
+            'postjob.title',
+            'category.title AS job_title',
+            'job_type.job_type',
+            'postjob.job_description',
+            'postjob.company_description',
+            'postjob.apply',
+            'postjob.company_profile',
+            'postjob.post_date',
+            'postjob.closing_date',
+            'location.location',
+            'postjob.company',
+            DB::raw('DATE_FORMAT(postjob.created_at, "%Y-%b-%d %h:%i %p") as created_at'),
+            DB::raw('DATE_FORMAT(postjob.updated_at, "%Y-%b-%d %H:%i %p") as updated_at'),
+            'postjob.user_id'
+        )
+    ->orderByDesc('postjob.updated_at')
+    ->where('location_id','=', "%{$location}")
+    ->orwhere('category_id','like', "%{$job_title}")
+    ->orwhere('job_type_id','=', "%{$job_type}")->get();
+  
+        $titleSearch = DB::table('postjob')->where('category_id',$job_title);
+        $locationSearch = DB::table('postjob')->where('location_id',$location);
+        $job_typeSearch = DB::table('postjob')->where('job_type_id',$job_type);
+        $result_search = $locationSearch->union($titleSearch)->union($job_typeSearch)->get();
+            // dd($jobs);
+        // $jobs = DB::table('postjob')->where('location_id','=', "%{$location}")
+        // ->orwhere('category_id','like', "%{$job_title}")
+        // ->orwhere('job_type_id','=', "%{$job_type}")
+        // ->get();
+        $category = Catagory::get();
+        $location = Location::get();
+        $jobtype  = JobType::get();
+        return view('\index', compact('jobs','category','location','jobtype'));
+    }
 
     // public function search(Request $request)
     // { 
@@ -285,7 +314,7 @@ class PostJobController extends Controller
     //         return view('\index', compact('jobs','category','location','jobtype'));
         
     //     }
-    }
+}
 
     // public function get_category($id){
     //     $job = PostJob::findOrFail(2);
