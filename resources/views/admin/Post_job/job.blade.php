@@ -4,14 +4,10 @@
 
     <div class="col-md-12 no-padding">
 
-           <form name="" action="#" method="get">
-                <div class="form-group">
-                    <div class="col-lg-3" style="margin-left: 10%;margin-top:5px ">
-                        <input type="text" name="q" class="form-control" value="" placeholder="Search for...">
-                    </div>
-                </div>
-                
-           </form>
+        <form method="GET" action="\search_job">
+            <input type="text" class="search" name="search" placeholder="Search..."></input>
+            <button class="btn btn-primary">Search</button>
+        </form>
            <div class="panel-heading bg-primary" style="margin-top: 10px">
             <span class="panel-title">
                 <span  style=" margin-left:1%"></span></span>

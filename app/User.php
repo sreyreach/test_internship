@@ -37,15 +37,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime'
     ];
-    public function getCreatedAtAttribute($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-M-d');
-    }
+    protected $dateFormat = 'Y-m-d H:i';
 
-    public function getUpdatedAtAttribute($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-M-d');
-    }
+    // public function getCreatedAtAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date,'UTC');
+    // }
+
+    // public function getUpdatedAtAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date,'UTC');
+    // }
 }

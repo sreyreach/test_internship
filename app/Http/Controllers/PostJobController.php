@@ -48,15 +48,12 @@ class PostJobController extends Controller
             'postjob.closing_date',
             'location.location',
             'postjob.company',
-            DB::raw('DATE_FORMAT(postjob.created_at, "%Y-%b-%d %h:%i %p") as created_at'),
-            DB::raw('DATE_FORMAT(postjob.updated_at, "%Y-%b-%d %H:%i %p") as updated_at'),
+            DB::raw('DATE_FORMAT(postjob.created_at, "%d-%b-%Y %h:%i %p") as created_at'),
+            DB::raw('DATE_FORMAT(postjob.updated_at, "%d-%b-%Y %H:%i %p") as updated_at'),
             'postjob.user_id'
         )
-    ->orderByDesc('postjob.updated_at')
-    // ->where('location_id','=', 'postjob.location_id')
-    // ->orwhere('category_id','=', 'postjob.category_id')
-    // ->orwhere('job_type_id','=', "postjob.job_type_id")
-    ->get();
+        ->orderByDesc('postjob.updated_at')
+        ->get();
     //dd($jobs);
         $location = Location::get();
         $category = Catagory::get();
@@ -168,16 +165,16 @@ class PostJobController extends Controller
     {
         // dd('dsd');
         $request->validate([
-            'title'             =>  'required',
-            'company'           => 'required',
-            'post_date'           => 'required',
-            'closing_date'           => 'required',
-            'company_description'    => 'required',
-            'apply'           => 'required',
-            'job_type'          =>  'required',
-            'location'          =>  'required',
-            'job_description'   =>  'required',
-            'company_profile'  => 'required|image|max:2048',
+            'title'                =>  'required',
+            'company'              => 'required',
+            'post_date'            => 'required',
+            'closing_date'         => 'required',
+            'company_description'  => 'required',
+            'apply'                => 'required',
+            'job_type_id'          =>  'required',
+            'location_id'          =>  'required',
+            'job_description'      =>  'required',
+            'company_profile'      => 'required|image|max:2048',
         ]);
 
         $image = $request->file('company_profile');
@@ -185,17 +182,17 @@ class PostJobController extends Controller
         $image->move(public_path('images'), $new_name);
 
         $form_data = array(
-            'title'             => $request->title,
-            'company'           => $request->company,
+            'title'               => $request->title,
+            'company'             => $request->company,
             'post_date'           => $request->post_date,
-            'closing_date'           => $request->closing_date,
-            'company_description'           => $request->company_description,
-            'apply'           => $request->apply,
-            'job_type'          => $request->job_type,
-            'location'          => $request->location,
-            'job_description'   => $request->job_description,
-            'user_id'           => Auth::user()->id,
-            'company_profile'   =>  $new_name,
+            'closing_date'        => $request->closing_date,
+            'company_description' => $request->company_description,
+            'apply'               => $request->apply,
+            'job_type_id'         => $request->job_type,
+            'location_id'         => $request->location_id,
+            'job_description'     => $request->job_description,
+            'user_id'             => Auth::user()->id,
+            'company_profile'     =>  $new_name,
         );
 
         PostJob::whereId($id)->update($form_data);
@@ -214,17 +211,6 @@ class PostJobController extends Controller
         $job->delete();
         return redirect('/my_post')->with('success','Data is successfully deleted!');
     }
-
-    // public function search(Request $request)
-    // {
-    //     $search = $request->search;
-        
-    //     $postjob = PostJob::where('title', 'like', '%'.$search.'%')
-    //     ->paginate(10);
-    //     return view('job', compact('postjob'))
-    //             ->with('i', (request()->input('page',1) -1) *5);
-    // } 
-
     public function search(Request $request)
     { 
         $job_type  = $request->job_type;
@@ -252,74 +238,21 @@ class PostJobController extends Controller
             DB::raw('DATE_FORMAT(postjob.updated_at, "%Y-%b-%d %H:%i %p") as updated_at'),
             'postjob.user_id'
         )
-    ->orderByDesc('postjob.updated_at')
-    ->where('location_id','=', "%{$location}")
-    ->orwhere('category_id','like', "%{$job_title}")
-    ->orwhere('job_type_id','=', "%{$job_type}")->get();
+        ->orderByDesc('postjob.updated_at')
+        ->where('location_id','=', "%{$location}")
+        ->orwhere('category_id','like', "%{$job_title}")
+        ->orwhere('job_type_id','=', "%{$job_type}")->get();
   
         $titleSearch = DB::table('postjob')->where('category_id',$job_title);
         $locationSearch = DB::table('postjob')->where('location_id',$location);
         $job_typeSearch = DB::table('postjob')->where('job_type_id',$job_type);
         $result_search = $locationSearch->union($titleSearch)->union($job_typeSearch)->get();
-            // dd($jobs);
-        // $jobs = DB::table('postjob')->where('location_id','=', "%{$location}")
-        // ->orwhere('category_id','like', "%{$job_title}")
-        // ->orwhere('job_type_id','=', "%{$job_type}")
-        // ->get();
         $category = Catagory::get();
         $location = Location::get();
         $jobtype  = JobType::get();
         return view('\index', compact('jobs','category','location','jobtype'));
     }
-
-    // public function search(Request $request)
-    // { 
-    //     //dd($request->all());
-    //         $job_type  = $request->job_type;
-    //         $location  = $request->location;
-    //         $job_title = $request->title;
-    //             $jobs = DB::table('postjob')
-    //             ->leftjoin('category','postjob.category_id','category.id')
-    //             ->leftjoin('job_type','postjob.job_type_id','job_type.id')
-    //             ->leftjoin('location','postjob.location_id','location.id')
-    //             ->select(
-    //                 'postjob.id',
-    //                 'postjob.company_profile',
-    //                 'postjob.title',
-    //                 'category.title AS job_title',
-    //                 'job_type.job_type',
-    //                 'postjob.job_description',
-    //                 'postjob.company_description',
-    //                 'postjob.apply',
-    //                 'postjob.company_profile',
-    //                 'postjob.post_date',
-    //                 'postjob.closing_date',
-    //                 'location.location',
-    //                 'postjob.company',
-    //                 'postjob.created_at',
-    //                 'postjob.updated_at',
-    //                 'postjob.user_id'
-    //             )
-    //         ->orderByDesc('postjob.updated_at')
-    //         ->where('postjob.location_id', $location)
-    //         ->orwhere('postjob.category_id', $job_title)
-    //         ->orwhere('postjob.job_type_id', $job_type)
-    //         ->get();
-    //         //dd($jobs);
-    //         $category = Catagory::get();
-    //         $location = Location::get();
-    //         $jobtype  = JobType::get();
-    //        // $jobs = Job::get();
-    //     // return view('\index', compact('jobs','category','location','jobtype'));
-    //         return view('\index', compact('jobs','category','location','jobtype'));
-        
-    //     }
 }
-
-    // public function get_category($id){
-    //     $job = PostJob::findOrFail(2);
-    //     return view('\post_job.view_categories',compact('jobs'));
-    // }
 
       
 

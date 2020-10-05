@@ -17,6 +17,17 @@ class AdminJobTypeController extends Controller
         return view('\admin\job_type\job_type',['jobtype' => $jobtype]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        
+        $jobtype = JobType::where('job_type', 'like', '%'.$search.'%')
+        ->orwhere('id', 'like', '%'.$search.'%')
+        ->paginate(10);
+        return view('\admin\job_type\job_type', compact('jobtype'))
+                ->with('i', (request()->input('page',1) -1) *5);
+    } 
+
     /**
      * Show the form for creating a new resource.
      *

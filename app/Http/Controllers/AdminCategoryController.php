@@ -18,6 +18,18 @@ class AdminCategoryController extends Controller
         // ->with('i', (request()->input('page',1) -1) *5);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        
+        $category = Catagory::where('title', 'like', '%'.$search.'%')
+        ->orwhere('id', 'like', '%'.$search.'%')
+        ->paginate(10);
+        return view('\admin\category\job_title', compact('category'))
+                ->with('i', (request()->input('page',1) -1) *5);
+    } 
+
+
     /**
      * Show the form for creating a new resource.
      *

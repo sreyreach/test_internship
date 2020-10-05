@@ -17,6 +17,20 @@ class AdminPostController extends Controller
         return view('\admin\Post_job\job',['postjob' => $postjob]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        
+        $postjob = PostJob::where('title', 'like', '%'.$search.'%')
+        ->orWhere('job_type_id', 'like', '%'.$search.'%')
+        ->orWhere('location_id', 'like', '%'.$search.'%')
+        ->orWhere('id', 'like','%'.$search.'%')
+        ->paginate(10);
+        return view('\admin\Post_job\job', compact('postjob'))
+                ->with('i', (request()->input('page',1) -1) *5);
+    } 
+
+
     /**
      * Show the form for creating a new resource.
      *

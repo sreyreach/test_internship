@@ -114,3 +114,11 @@ Route::get('/location/{id}/destroy', 'AdminLocationController@destroy');
 //Admin Job Type
 Route::resource('adminjobtype','AdminJobTypeController');
 Route::get('/jobtype/{id}/destroy', 'AdminJobTypeController@destroy');
+
+//Admin Search
+Route::get('/search_admin', 'AdminController@search');
+Route::get('/search_employer', 'EmployerController@search');
+Route::get('/search_job', 'AdminPostController@search');
+Route::get('/search_category', 'AdminCategoryController@search');
+Route::get('/search_jobtype', 'AdminJobTypeController@search');
+Route::get('/search_location', 'AdminLocationController@search');

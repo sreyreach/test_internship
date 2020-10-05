@@ -109,7 +109,7 @@
           
           <form method="POST" action="{{route('postjob.store')}}" enctype="multipart/form-data" class="p-5 bg-white">
             @csrf
-              <div class="row form-group">
+              {{-- <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label for="option-price-1">
                     <input type="checkbox" id="option-price-1"> <span class="text-success">$500</span> For 30 days
@@ -120,7 +120,7 @@
                     <input type="checkbox" id="option-price-2"> <span class="text-success">$300</span> / Monthly Recurring
                   </label>
                 </div>
-              </div>
+              </div> --}}
 
               <div class="row form-group mb-5">
                 <div class="col-md-12 mb-3 mb-md-0">

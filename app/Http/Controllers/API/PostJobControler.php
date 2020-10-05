@@ -197,7 +197,7 @@ class PostJobControler extends Controller
         $request->location_id = $location_id;
 
         $user = User::where('id', $request->user_id)->select('role')->first();
-
+        dd($request->user_id);
         if ($user->role != '1') {
            
             $credential = $request->only('title','category_id', 'company', 'job_type_id', 'location_id', 'job_description',

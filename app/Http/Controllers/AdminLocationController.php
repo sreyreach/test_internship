@@ -17,6 +17,18 @@ class AdminLocationController extends Controller
         return view('\admin\location\location',['location' => $location]);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        
+        $location = Location::where('location', 'like', '%'.$search.'%')
+        ->orwhere('id', 'like', '%'.$search.'%')
+        ->paginate(10);
+        return view('\admin\location\location', compact('location'))
+                ->with('i', (request()->input('page',1) -1) *5);
+    } 
+
+
     /**
      * Show the form for creating a new resource.
      *

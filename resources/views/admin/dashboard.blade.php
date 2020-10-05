@@ -50,12 +50,12 @@
             </a>
            {{-- @endif
            @if( Auth::user()->role ==  "3" || Auth::user()->role == "1") --}}
-            <a href="#">
+            {{-- <a href="#">
                 <div id="materials" class="item ">
                     <img class="item-icon" src="/images/users.png"/>
                     <h2 class="item-title">Jobseeker</h2>
                 </div>
-            </a>
+            </a> --}}
             {{-- @endif
             @if( Auth::user()->role == "2" || Auth::user()->role == "1") --}}
             <a href="{{ route('post.index') }}">
@@ -66,12 +66,12 @@
             </a>
             {{-- @endif
             @if( Auth::user()->role == "3" || Auth::user()->role == "1") --}}
-            <a href="#">
+            {{-- <a href="#">
                 <div id="messages" class="item ">
                     <img class="item-icon" src="/images/cv.png"/>
                     <h2 class="item-title">Post CV</h2>
                 </div>
-            </a>
+            </a> --}}
             {{-- @endif --}}
             <a href="{{ route('admincategory.index')}}">
                 <div id="messages" class="item ">
@@ -93,19 +93,18 @@
                     <h2 class="item-title">Add Job Type</h2>
                 </div>
             </a>
-            <a href="#">
-                <div id="messages" class="item ">
-                    {{-- <img class="item-icon" src="/images/locat.png"/> --}}
-                    <span class="fa fa-power-off" style="color: #fff; margin-left:15%; margin-top:5%"></span>
-                    <h2 class="item-title">Logout</h2>
-                </div>
+            <a class="fa fa-power-off" style="color: #fff; margin-left:15%" href="{{ route('logout') }}" 
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                Logout
             </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none" >
+                    @csrf
+                </form>
 
         </div>
         <div id="right">
-            <div id="topbar">
-                <img id="dotdotdot" src="/images/dotdotdot.png">
-            </div>
             <main class="py-4">
             @yield('content')
             </main>

@@ -18,6 +18,17 @@ class AdminController extends Controller
         return view('\admin\admin\user_admin',['user' => $user]);
               
     }
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        
+        $user = User::where('role',1)->where('first_name', 'like', '%'.$search.'%')
+        ->orWhere('last_name', 'like', '%'.$search.'%')
+        ->orwhere('id', 'like', '%'.$search.'%')
+        ->paginate(10);
+        return view('\admin\admin\user_admin', compact('user'))
+                ->with('i', (request()->input('page',1) -1) *5);
+    } 
 
     /**
      * Show the form for creating a new resource.
@@ -103,7 +114,7 @@ class AdminController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'images'        => 'required',
+            'images'       => 'required',
             'first_name'   => 'required',
             'last_name'    => 'required',
             'company_name' => 'required',
