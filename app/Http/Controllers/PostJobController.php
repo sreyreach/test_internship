@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
 use App\PostJob;
 use App\Catagory;
 use App\Location;
 use App\JobType;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Vinkla\Hashids\Facades\Hashids;
 class PostJobController extends Controller
 {
@@ -59,10 +59,41 @@ class PostJobController extends Controller
         $location = Location::get();
         $category = Catagory::get();
         $jobtype  = JobType::get();
-        return view('\index',compact('jobs','location','category','jobtype'));
+            $category_number = DB::table('postjob as p')
+                      ->leftJoin('category as c','p.category_id','c.id')
+                      ->select('c.id','c.title', DB::raw('count(*) as total'))
+                      ->groupBy('p.category_id')
+                      ->get();
+        return view('\index',compact('jobs','location','category','jobtype','category_number'));
     }
-    public function  categories(){
-        $jobs = PostJob::get();
+    public function  categories($id){
+        $jobs = Postjob::where('category_id',$id)->get();
+    //     ->leftjoin('category','postjob.category_id','category.id')
+    //     ->leftjoin('job_type','postjob.job_type_id','job_type.id')
+    //     ->leftjoin('location','postjob.location_id','location.id')
+    //     ->select(
+    //         'postjob.id',
+    //         'postjob.company_profile',
+    //         'postjob.title',
+    //         'category.title AS job_title',
+    //         'job_type.job_type',
+    //         'postjob.job_description',
+    //         'postjob.company_description',
+    //         'postjob.apply',
+    //         'postjob.company_profile',
+    //         'postjob.post_date',
+    //         'postjob.closing_date',
+    //         'location.location',
+    //         'postjob.company',
+    //         'postjob.created_at',
+    //         'postjob.updated_at',
+    //         'postjob.user_id'
+    //     )
+    // ->orderByDesc('postjob.updated_at')
+    // ->where('location_id','=', 'postjob.location_id')
+    // ->orwhere('category_id','=', 'postjob.category_id')
+    // ->orwhere('job_type_id','=', "postjob.job_type_id")
+    // ->get();
         // $jobs = PostJob::where("title","Graphic Designer")->get();
         return view('\post_job.view_categories',['jobs' => $jobs]);
     }

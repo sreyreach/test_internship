@@ -281,7 +281,23 @@ class PostJobControler extends Controller
             $photo->move(public_path('images'), $new_name);
             $request['company_profile'] = $new_name;
         }else{
-            return response()->json(['error'=>'Unauthorised'], 401);
+            
+            $form_data = array(
+                'title'               => $request->title,
+                'category_id'         => $job_title_id,
+                'company'             => $request->company,
+                'post_date'           => $request->post_date,
+                'closing_date'        => $request->closing_date,
+                'company_description' => $request->company_description,
+                'apply'               => $request->apply,
+                'job_type_id'         => $job_type_id,
+                'location_id'         => $location_id,
+                'job_description'     => $request->job_description,
+            ); 
+            PostJob::where('id',$id)->update($form_data);
+            $postjob = PostJob::where('id',$id)->get(); 
+             
+            return response()->json($postjob);
         }
           
         $form_data = array(
@@ -364,6 +380,15 @@ class PostJobControler extends Controller
     public function readTypeJob($title ,Request $request){
         $stu = PostJob::where('title', 'like', '%'.$title.'%')->get();
         return response()->json($stu);
+    }
+
+    public function readTypeJobByCategory(){
+       return DB::table('postjob as p')
+                 ->leftJoin('category as c','p.category_id','c.id')
+                 ->select('c.title', DB::raw('count(*) as total'))
+                 ->groupBy('p.category_id')
+                 ->get();
+        return DB::table('postjob')->select('category_id')->get();
     }
 
     public function getLocation(){

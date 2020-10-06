@@ -29,11 +29,12 @@ Route::post('/postjob/create','API\PostJobControler@store');
 Route::post('/postjob/update/{id}','API\PostJobControler@update'); 
 Route::get('/postjob/show/{id}','API\PostJobControler@show'); 
 Route::get('/postjob/read','API\PostJobControler@index'); 
-Route::get('/postjob/delete/{id}','API\PostJobControler@destroy'); 
+Route::delete('/postjob/delete/{id}','API\PostJobControler@destroy'); 
 
 Route::get('/postjob/user/{id}','API\PostJobControler@userId');
 Route::get('/postjob/readtypejob/{title}','API\PostJobControler@readTypeJob');
-Route::get('/postjob/getdownload/{id}/{updated_at}','API\PostJobControler@getDownload'); 
+Route::get('/postjob/getdownload/{id}/{updated_at}','API\PostJobControler@getDownload');
+Route::get('/postjob/category','API\PostJobControler@readTypeJobByCategory'); 
 
 //Location
 Route::get('/getlocation','API\PostJobControler@getLocation');
@@ -65,9 +66,12 @@ Route::group(["middleware" => ['auth:api']], function () {
     // Route::get('/postjob/user/{id}','API\PostJobControler@userId');
     // Route::get('/postjob/readtypejob/{title}','API\PostJobControler@readTypeJob');
    
-
+Route::post('change-password', 'API\AuthControler@change_password');
 
 });
+Route::post('forgot-password', 'API\AuthControler@forgot_password');
+
+
 
 //get data for filter
 //Location

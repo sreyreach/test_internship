@@ -269,40 +269,16 @@
           </div>
         </div>
         <div class="row">
-        	<div class="col-md-3 ftco-animate">
+			@foreach ($category_number as $item_category)
+			<div class="col-md-3 ftco-animate">
         		<ul class="category">
-        			<li><a href="/view_categories">Web Development <br><span class="number">354</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="/view_categories">Graphic Designer <br><span class="number">143</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="/view_categories">Multimedia <br><span class="number">100</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="/view_categories">Advertising <br><span class="number">90</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
+					{{-- @for ($i = 0; $i < 4; $i++) --}}
+						<li><a href="/view_categories/{{ $item_category->id }}">{{ $item_category->title }}<br><span class="number">{{ $item_category->total }}</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
+					{{-- @endfor --}}
         		</ul>
         	</div>
-        	<div class="col-md-3 ftco-animate">
-        		<ul class="category">
-        			<li><a href="#">Education &amp; Training <br><span class="number">100</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="#">Accounting <br><span class="number">200</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="#">Social Media <br><span class="number">300</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="#">E-commerce <br><span class="number">150</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        		</ul>
-        	</div>
-        	<div class="col-md-3 ftco-animate">
-        		<ul class="category">
-        			<li><a href="#">PHP Programming <br><span class="number">400</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="#">Project Management <br><span class="number">100</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="#">Finance Management <br><span class="number">222</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="#">Office &amp; Admin <br><span class="number">123</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        		</ul>
-        	</div>
-        	<div class="col-md-3 ftco-animate">
-        		<ul class="category">
-        			<li><a href="#">Web Designer <br><span class="number">324</span> <span>Open position</span></span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="#">Customer Service <br><span class="number">564</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="#">Marketing &amp; Sales <br><span class="number">234</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        			<li><a href="#">Software Development <br><span class="number">425</span> <span>Open position</span><i class="ion-ios-arrow-forward"></i></a></li>
-        		</ul>
-        	</div>
+		   @endforeach 
         </div>
-    	</div>
     </section>
 	<section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url(&quot;images/bg_1.jpg&quot;); background-position: 50% -114px;" data-stellar-background-ratio="0.5">
     	<div class="container">

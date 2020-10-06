@@ -42,7 +42,7 @@ Route::get('/apply', function () {
 
 Route::get('/view', 'PostJobController@view');
 Route::get('/', 'PostJobController@hotjob');
-Route::get('/view_categories', 'PostJobController@categories');
+Route::get('/view_categories/{category_id}', 'PostJobController@categories');
 Route::get('/show/{id}', 'PostJobController@show');
 Route::get('edit/postjob/{id}', 'PostJobController@edit');
 Route::post('update/postjob/{id}', 'PostJobController@update');
